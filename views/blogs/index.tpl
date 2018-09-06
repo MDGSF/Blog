@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>闲言轻博客模板 v1.0 页面目录</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="/static/layui-v2.4.3/layui/css/layui.css">
-</head>
-<body>
 
 <h1 style="position: absolute; width:100%; text-align: center; top: 20px; left: 0; font-size: 20px; color: #333;">
   基于 layui 的极简社区页面模版：Fly Template v3.0 所有页面目录
@@ -58,8 +47,3 @@
     </tbody>
   </table>
 </div>
-
-
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_30088308'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D30088308' type='text/javascript'%3E%3C/script%3E"));</script>
-</body>
-</html>

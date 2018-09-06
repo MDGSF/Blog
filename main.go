@@ -20,5 +20,7 @@ func main() {
 	// use http://localhost:8080/down1/123.txt to access directory "download1/123.txt"
 	beego.SetStaticPath("/down1", "download1")
 
+	beego.SetStaticPath("/post", "_posts")
+
 	beego.Run()
 }
