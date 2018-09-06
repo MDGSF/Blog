@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/MDGSF/Blog/models"
 	_ "github.com/MDGSF/Blog/routers"
 
 	"github.com/astaxie/beego"

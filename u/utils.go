@@ -1,6 +1,9 @@
 package u
 
-import "regexp"
+import (
+	"os"
+	"regexp"
+)
 
 // IsValidIDCard check IDCard is valid or not.
 func IsValidIDCard(IDCard string) bool {
@@ -27,4 +30,22 @@ func IsValidIDCard(IDCard string) bool {
 	}
 
 	return false
+}
+
+// IsDir judge whether dir is directory.
+func IsDir(dir string) bool {
+	fileInfo, err := os.Stat(dir)
+	if err != nil {
+		return false
+	}
+	return fileInfo.Mode().IsDir()
+}
+
+// IsFile judge whether filename is file.
+func IsFile(filename string) bool {
+	fileInfo, err := os.Stat(filename)
+	if err != nil {
+		return false
+	}
+	return fileInfo.Mode().IsRegular()
 }
