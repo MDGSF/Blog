@@ -17,5 +17,8 @@ func main() {
 	beego.Info("httpPort =", httpPort)
 	beego.Info("runMode =", runMode)
 
+	// use http://localhost:8080/down1/123.txt to access directory "download1/123.txt"
+	beego.SetStaticPath("/down1", "download1")
+
 	beego.Run()
 }

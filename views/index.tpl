@@ -28,6 +28,10 @@
     </thead>
     <tbody>
       <tr>
+        <td>beego default</td>
+        <td><a href="default" target="_blank">default.tpl</td>
+      </tr>
+      <tr>
         <td>首页</td>
         <td><a href="html/index.html" target="_blank">index.html</td>
       </tr>
