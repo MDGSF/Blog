@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/MDGSF/Blog/u"
 	"github.com/astaxie/beego"
 )
 
@@ -11,12 +12,11 @@ type LoginController struct {
 
 // Get login controller get
 func (c *LoginController) Get() {
-	beego.Info("LoginController get, c.Data =", c.Data)
-
 	if c.Ctx.Request.Form == nil {
 		c.Ctx.Request.ParseForm()
 	}
 
+	beego.Info("LoginController get, c.Data =", c.Data)
 	beego.Info("LoginController get, c.Ctx.Request.Form =", c.Ctx.Request.Form)
 
 	c.TplName = "demo/login.tpl"
@@ -24,15 +24,19 @@ func (c *LoginController) Get() {
 
 // Post login controller post
 func (c *LoginController) Post() {
-	beego.Info("LoginController post, c.Data =", c.Data)
-
 	if c.Ctx.Request.Form == nil {
 		c.Ctx.Request.ParseForm()
 	}
 
+	beego.Info("LoginController post, c.Data =", c.Data)
 	beego.Info("LoginController post, c.Ctx.Request.Form =", c.Ctx.Request.Form)
 
 	// verify user name and password here.
+
+	sess, _ := u.GlobalSessions.SessionStart(c.Ctx.ResponseWriter, c.Ctx.Request)
+	defer sess.SessionRelease(c.Ctx.ResponseWriter)
+	//username := sess.Get("username")
+	sess.Set("username", c.Ctx.Request.Form["username"])
 
 	c.TplName = "index.tpl"
 }
