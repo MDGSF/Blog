@@ -3,10 +3,7 @@ package models
 import (
 	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
-	"strconv"
-	"strings"
 	"sync"
 	"time"
 
@@ -15,6 +12,8 @@ import (
 )
 
 func init() {
+
+	curYear = time.Now().Year()
 
 	AllPosts = make([]*TPost, 0)
 
@@ -26,6 +25,8 @@ func init() {
 
 	LoadAllPostsDirectory()
 }
+
+var curYear int
 
 // AllPosts store all posts information.
 var AllPosts []*TPost
@@ -81,36 +82,12 @@ loop:
 				break loop
 			}
 
-			newPost := &TPost{}
-			newPost.FileName = fileInfo.FileInfo.Name()
-			fileBase := path.Base(newPost.FileName)
-			fileExt := path.Ext(newPost.FileName)
-			beego.Info("dir =", fileInfo.Dir)
-			beego.Info("FileName =", newPost.FileName)
-			beego.Info("fileBase =", fileBase)
-			beego.Info("fileExt =", fileExt)
-
-			fileNameOnly := strings.TrimSuffix(fileBase, fileExt)
-			beego.Info("fileNameOnly =", fileNameOnly)
-
-			fileNameParts := strings.Split(fileNameOnly, "-")
-			if len(fileNameParts) < 4 {
-				// invalid file
+			newPost := NewPost(fileInfo.Dir, fileInfo.FileInfo.Name())
+			if newPost == nil {
 				continue
 			}
 
-			strYear := fileNameParts[0]
-			strMonth := fileNameParts[1]
-			strDay := fileNameParts[2]
-			beego.Info("strYear, strMonth, strDay =", strYear, strMonth, strDay)
-
-			iYear, _ := strconv.Atoi(strYear)
-			iMonth, _ := strconv.Atoi(strMonth)
-			iDay, _ := strconv.Atoi(strDay)
-
-			// check valid
-
-			time.Date(iYear, time.Month(iMonth), iDay, 0, 0, 0, 0, time.Local)
+			AllPosts = append(AllPosts, newPost)
 		}
 	}
 }
