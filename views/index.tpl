@@ -6,7 +6,7 @@
   <li class="layui-timeline-item">
     <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
     <div class="layui-timeline-content layui-text">
-      <h3 class="layui-timeline-title"><a href="#" rel="bookmark">{{.Title}}</a></h3>
+      <h3 class="layui-timeline-title"><a href="{{.ReqURL}}" rel="bookmark">{{.Title}}</a></h3>
       <ul>
         <li> {{.Time}} </li>
         <li> {{.Author}} </li>

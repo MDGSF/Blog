@@ -12,6 +12,8 @@
   <meta name="keywords" content="mdgsf,{{.Website}}">
   <meta name="description" content="mdsg blog,html,css,js,golang">
 
+  <link rel="stylesheet" href="/static/css/github-markdown.css">
+
   <!-- <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="/static/layui-v2.4.3/layui/css/layui.css">
 </head>

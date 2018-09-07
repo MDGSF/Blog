@@ -19,6 +19,7 @@ const (
 
 // TPost one post information.
 type TPost struct {
+	ReqURL            string
 	Dir               string
 	FileName          string
 	Time              time.Time
@@ -35,6 +36,7 @@ func NewPost(Dir, FileName string) *TPost {
 	newPost := &TPost{}
 	newPost.Dir = Dir
 	newPost.FileName = FileName
+	newPost.ReqURL = "/posts/" + FileName
 
 	fileBase := path.Base(newPost.FileName)
 	fileExt := path.Ext(newPost.FileName)
