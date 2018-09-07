@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
 	"sync"
 	"time"
 
@@ -30,6 +31,15 @@ var curYear int
 
 // AllPosts store all posts information.
 var AllPosts []*TPost
+
+// ByTime sort AllPosts array by post time.
+type ByTime []*TPost
+
+func (s ByTime) Len() int      { return len(s) }
+func (s ByTime) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s ByTime) Less(i, j int) bool {
+	return s[i].Time.Before(s[j].Time)
+}
 
 // AllPostsFileName key: file name, value : TPost.
 var AllPostsFileName map[string]*TPost
@@ -89,6 +99,13 @@ loop:
 
 			AllPosts = append(AllPosts, newPost)
 		}
+	}
+
+	sort.Sort(ByTime(AllPosts))
+
+	for k, v := range AllPosts {
+		AllPostsFileName[v.FileName] = AllPosts[k]
+		AllPostsName[v.Title] = AllPosts[k]
 	}
 }
 
