@@ -7,7 +7,7 @@ import (
 
 // PostController main controller
 type PostController struct {
-	CommonController
+	beego.Controller
 }
 
 // Get main controller get
@@ -20,6 +20,6 @@ func (c *PostController) Get() {
 		return
 	}
 
-	c.TplName = "post.tpl"
+	c.TplName = "post.html"
 	c.Data["Content"] = string(stPost.Content)
 }

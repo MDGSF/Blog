@@ -25,7 +25,7 @@ func (c *MainController) Get() {
 
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
-	c.TplName = "default.tpl"
+	c.TplName = "demo/default.tpl"
 }
 
 // Post main controller Post

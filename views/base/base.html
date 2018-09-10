@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{template "base/head.html" .}}
+        {{template "head" .}}
+    </head>
+    <body>
+        {{template "header" .}}
+        {{template "body" .}}
+        {{template "footer" .}}
+    </body>
+</html>
+
+{{define "head"}}
+{{end}}
+
+{{define "header"}}
+    {{template "base/navbar.html" .}}
+{{end}}
+
+{{define "footer"}}
+    {{template "base/foot.html" .}}
+{{end}}

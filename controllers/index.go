@@ -10,12 +10,16 @@ import (
 
 // IndexController main controller
 type IndexController struct {
-	CommonController
+	beego.Controller
 }
 
 // Get main controller get
 func (c *IndexController) Get() {
 	beego.Info("IndexController get", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
+
+	if c.Ctx.Request.Form == nil {
+		c.Ctx.Request.ParseForm()
+	}
 
 	pageCount := len(models.AllPosts)
 	pageLimit := 10
@@ -40,7 +44,7 @@ func (c *IndexController) Get() {
 		curPageIndex = curPage - 1
 	}
 
-	c.TplName = "index.tpl"
+	c.TplName = "index.html"
 
 	start := curPageIndex * pageLimit
 	end := start + pageLimit

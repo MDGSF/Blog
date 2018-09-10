@@ -12,5 +12,5 @@ type LayuiController struct {
 // Get layui controller get
 func (c *LayuiController) Get() {
 	beego.Info("LayuiController get, c.Data =", c.Data)
-	c.TplName = "layui.tpl"
+	c.TplName = "demo/layui.tpl"
 }
