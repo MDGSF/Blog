@@ -22,7 +22,9 @@ func init() {
 
 	AllPostsName = make(map[string]*TPost)
 
-	AllPostsTags = make(map[string]*TPost)
+	AllPostsTags = make(map[string][]*TPost)
+
+	MonthPosts = make(map[string][]*TPost)
 
 	LoadAllPostsDirectory()
 }
@@ -47,8 +49,11 @@ var AllPostsFileName map[string]*TPost
 // AllPostsName key: post name, value : TPost.
 var AllPostsName map[string]*TPost
 
-// AllPostsTags key: tag name, value : TPost.
-var AllPostsTags map[string]*TPost
+// AllPostsTags key: tag name, value: post array.
+var AllPostsTags map[string][]*TPost
+
+// MonthPosts key: year-month, value: post array.
+var MonthPosts map[string][]*TPost
 
 // LoadAllPostsDirectory load all posts from all PostDirectory.
 func LoadAllPostsDirectory() {
@@ -103,9 +108,28 @@ loop:
 
 	sort.Sort(ByTime(AllPosts))
 
-	for k, v := range AllPosts {
-		AllPostsFileName[v.FileName] = AllPosts[k]
-		AllPostsName[v.Title] = AllPosts[k]
+	for k, post := range AllPosts {
+		AllPostsFileName[post.FileName] = AllPosts[k]
+		AllPostsName[post.Title] = AllPosts[k]
+
+		for _, tag := range post.Tags {
+			v1, ok := AllPostsTags[tag]
+			if !ok {
+				AllPostsTags[tag] = make([]*TPost, 0)
+				AllPostsTags[tag] = append(AllPostsTags[tag], AllPosts[k])
+			} else {
+				v1 = append(v1, AllPosts[k])
+			}
+		}
+
+		v2, ok := MonthPosts[post.YearMonth]
+		if !ok {
+			MonthPosts[post.YearMonth] = make([]*TPost, 0)
+			MonthPosts[post.YearMonth] = append(MonthPosts[post.YearMonth], AllPosts[k])
+		} else {
+			v2 = append(v2, AllPosts[k])
+		}
+
 	}
 }
 

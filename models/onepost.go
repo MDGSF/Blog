@@ -23,6 +23,7 @@ type TPost struct {
 	Dir               string
 	FileName          string
 	Time              time.Time
+	YearMonth         string // "2018-09"
 	Title             string
 	Author            string
 	Categories        string
@@ -73,6 +74,7 @@ func NewPost(Dir, FileName string) *TPost {
 		return nil
 	}
 
+	newPost.YearMonth = strYear + "-" + strMonth
 	newPost.Time = time.Date(iYear, time.Month(iMonth), iDay, 0, 0, 0, 0, time.Local)
 
 	filePath := filepath.Join(Dir, FileName)
@@ -122,6 +124,12 @@ func NewPost(Dir, FileName string) *TPost {
 				newPost.Categories = lineParts[1]
 			case "tags":
 				tags := strings.Split(lineParts[1], ",")
+				for k := range tags {
+					tags[k] = strings.TrimSpace(tags[k])
+					tags[k] = strings.TrimPrefix(tags[k], "[")
+					tags[k] = strings.TrimSuffix(tags[k], "]")
+					tags[k] = strings.ToLower(tags[k])
+				}
 				newPost.Tags = tags
 			case "description":
 			case "published":
@@ -130,7 +138,7 @@ func NewPost(Dir, FileName string) *TPost {
 	}
 
 	if len(newPost.Author) == 0 {
-		newPost.Author = "MDGSF"
+		newPost.Author = beego.AppConfig.String("PostAuthor")
 	}
 
 	contentParts := strings.SplitN(string(content), headerSplit, 3)
