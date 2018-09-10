@@ -1,10 +1,11 @@
+<nav>
 {{if gt .paginator.PageNums 1}}
 <ul class="pagination pagination-sm">
     {{if .paginator.HasPrev}}
-        <li><a href="{{.paginator.PageLinkFirst}}">paginator.first_page</a></li>
+        <li><a href="{{.paginator.PageLinkFirst}}">首页</a></li>
         <li><a href="{{.paginator.PageLinkPrev}}">&lt;</a></li>
     {{else}}
-        <li class="disabled"><a>paginator.first_page</a></li>
+        <li class="disabled"><a>首页</a></li>
         <li class="disabled"><a>&lt;</a></li>
     {{end}}
     {{range $index, $page := .paginator.Pages}}
@@ -14,10 +15,11 @@
     {{end}}
     {{if .paginator.HasNext}}
         <li><a href="{{.paginator.PageLinkNext}}">&gt;</a></li>
-        <li><a href="{{.paginator.PageLinkLast}}">paginator.last_page</a></li>
+        <li><a href="{{.paginator.PageLinkLast}}">尾页</a></li>
     {{else}}
         <li class="disabled"><a>&gt;</a></li>
-        <li class="disabled"><a>paginator.last_page</a></li>
+        <li class="disabled"><a>尾页</a></li>
     {{end}}
 </ul>
 {{end}}
+</nav>

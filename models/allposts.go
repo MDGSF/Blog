@@ -113,23 +113,22 @@ loop:
 		AllPostsName[post.Title] = AllPosts[k]
 
 		for _, tag := range post.Tags {
-			v1, ok := AllPostsTags[tag]
+			if len(tag) == 0 {
+				continue
+			}
+
+			_, ok := AllPostsTags[tag]
 			if !ok {
 				AllPostsTags[tag] = make([]*TPost, 0)
-				AllPostsTags[tag] = append(AllPostsTags[tag], AllPosts[k])
-			} else {
-				v1 = append(v1, AllPosts[k])
 			}
+			AllPostsTags[tag] = append(AllPostsTags[tag], AllPosts[k])
 		}
 
-		v2, ok := MonthPosts[post.YearMonth]
+		_, ok := MonthPosts[post.YearMonth]
 		if !ok {
 			MonthPosts[post.YearMonth] = make([]*TPost, 0)
-			MonthPosts[post.YearMonth] = append(MonthPosts[post.YearMonth], AllPosts[k])
-		} else {
-			v2 = append(v2, AllPosts[k])
 		}
-
+		MonthPosts[post.YearMonth] = append(MonthPosts[post.YearMonth], AllPosts[k])
 	}
 }
 
