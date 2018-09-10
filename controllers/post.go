@@ -22,4 +22,5 @@ func (c *PostController) Get() {
 
 	c.TplName = "post.html"
 	c.Data["Content"] = string(stPost.Content)
+	c.Data["Title"] = stPost.Title
 }

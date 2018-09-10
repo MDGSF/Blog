@@ -1,9 +1,25 @@
+{{template "base/base.html" .}}
+
+{{define "meta"}}
+<title>{{.Title}}</title>
+<link href="/static/css/github-markdown.css" rel="stylesheet">
+{{end}}
+
+{{define "body"}}
+
+<div class="blog-header">
+  <h1 class="blog-title">{{.Title}}</h1>
+  <p class="lead blog-description">{{.Description}}</p>
+</div>
+
 <div class="markdown-body">
 <div id="content">
 </div>
 </div>
-<!-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> -->
+
 <script src="/static/marked/marked.min.js"></script>
 <script>
 document.getElementById('content').innerHTML = marked('{{.Content}}');
 </script>
+
+{{end}}
