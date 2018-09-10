@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/MDGSF/Blog/models"
+	"github.com/MDGSF/Blog/u"
 	"github.com/astaxie/beego"
 )
 
@@ -16,34 +17,12 @@ type IndexController struct {
 func (c *IndexController) Get() {
 	beego.Info("IndexController get", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
-	var pageCount int
-	var pageLimit int
+	pageCount := len(models.AllPosts)
+	pageLimit := 10
 	var curPage int
+	var curPageIndex int
 
-	strPageCount := c.Ctx.Request.Form.Get("pageCount")
-	if len(strPageCount) > 0 {
-		clientPageCount, _ := strconv.Atoi(strPageCount)
-		if clientPageCount != len(models.AllPosts) {
-			beego.Error("invalid page count from client")
-		}
-		pageCount = len(models.AllPosts)
-	} else {
-		pageCount = len(models.AllPosts)
-	}
-
-	strPageLimit := c.Ctx.Request.Form.Get("pageLimit")
-	if len(strPageLimit) > 0 {
-		clientPageLimit, _ := strconv.Atoi(strPageLimit)
-		if clientPageLimit < 0 {
-			pageLimit = 10
-		} else {
-			pageLimit = clientPageLimit
-		}
-	} else {
-		pageLimit = 10
-	}
-
-	strCurPage := c.Ctx.Request.Form.Get("curPage")
+	strCurPage := c.Ctx.Request.Form.Get("p")
 	if len(strCurPage) > 0 {
 		clientCurPage, _ := strconv.Atoi(strCurPage)
 		if clientCurPage < 0 {
@@ -55,22 +34,28 @@ func (c *IndexController) Get() {
 		curPage = 0
 	}
 
-	c.TplName = "index.tpl"
-	c.Data["PageCount"] = pageCount
-	c.Data["PageLimit"] = pageLimit
-	c.Data["CurPage"] = curPage
+	if curPage == 0 {
+		curPageIndex = 0
+	} else {
+		curPageIndex = curPage - 1
+	}
 
-	start := curPage * pageLimit
+	c.TplName = "index.tpl"
+
+	start := curPageIndex * pageLimit
 	end := start + pageLimit
 	if start > pageCount {
-		beego.Error(pageCount, pageLimit, curPage, start, end)
+		beego.Error(pageCount, pageLimit, curPageIndex, start, end)
 		return
 	}
 	if end > pageCount {
 		end = pageCount
 	}
 
-	beego.Info(pageCount, pageLimit, curPage, start, end)
+	beego.Info(pageCount, pageLimit, curPageIndex, curPage, start, end)
 
 	c.Data["Posts"] = models.AllPosts[start:end]
+
+	p := u.NewPaginator(c.Ctx.Request, pageLimit, pageCount)
+	c.Data["paginator"] = p
 }
