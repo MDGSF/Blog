@@ -21,6 +21,7 @@
         {{range .}}
         <div class="blog-post">
         <h2 class="blog-post-title"><a href="{{.ReqURL}}" rel="bookmark">{{.Title}}</a></h2>
+        <p class="blog-post-meta">{{.Abstraction}}</p>
         <p class="blog-post-meta">{{.Time}} by <a href="#">{{.Author}}</a></p>
         </div><!-- /.blog-post -->
         {{end}}

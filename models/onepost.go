@@ -30,6 +30,7 @@ type TPost struct {
 	Tags              []string
 	ContentWithHeader []byte
 	Content           []byte
+	Abstraction       string
 }
 
 // NewPost create a new post.
@@ -150,6 +151,12 @@ func NewPost(Dir, FileName string) *TPost {
 	// beego.Info("contentParts[2] =", contentParts[2]) // content
 
 	newPost.Content = []byte(contentParts[2])
+
+	if len(newPost.Content) > 100 {
+		newPost.Abstraction = string(newPost.Content[:100])
+	} else {
+		newPost.Abstraction = string(newPost.Content[:len(newPost.Content)])
+	}
 
 	return newPost
 }

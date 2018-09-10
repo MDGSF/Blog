@@ -152,6 +152,11 @@ h6,
   margin-bottom: 5px;
   font-size: 40px;
 }
+.blog-post-title a {text-decoration: none}
+.blog-post-title a:link { color: #333 }
+.blog-post-title a:visited { color: #333 }
+.blog-post-title a:hover { color:#ff0000 }
+.blog-post-title a:active { color:#ff0000 }
 
 .blog-post-meta {
   margin-bottom: 20px;
