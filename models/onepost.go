@@ -129,6 +129,10 @@ func NewPost(Dir, FileName string) *TPost {
 		}
 	}
 
+	if len(newPost.Author) == 0 {
+		newPost.Author = "MDGSF"
+	}
+
 	contentParts := strings.SplitN(string(content), headerSplit, 3)
 	if len(contentParts) != 3 {
 		return nil
