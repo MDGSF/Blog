@@ -19,4 +19,5 @@ func init() {
 	beego.Router("/posts/*", &controllers.PostController{})
 	beego.Router("/tags", &controllers.TagsController{})
 	beego.Router("/yearmontharchives", &controllers.YearMonthController{})
+	beego.Router("/search", &controllers.SearchController{})
 }
