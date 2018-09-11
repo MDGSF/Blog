@@ -1,0 +1,25 @@
+{{template "base/base.html" .}}
+
+{{define "meta"}}
+<title>{{.TagName}}</title>
+<link href="/static/css/github-markdown.css" rel="stylesheet">
+{{end}}
+
+{{define "body"}}
+
+<div class="container">
+
+<div class="blog-header">
+  <h1 class="blog-title">{{.TagName}}</h1>
+</div>
+
+<div class="row">
+    {{range $index, $value := .Articles}}
+    <a href="{{.ReqURL}}" class="list-group-item">{{$value.Title}}</a>
+    {{end}}
+</div>
+
+</div> <!-- container -->
+
+
+{{end}}

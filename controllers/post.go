@@ -20,7 +20,7 @@ func (c *PostController) Get() {
 		return
 	}
 
-	c.TplName = "post.html"
+	c.TplName = "front/post.html"
 	c.Data["Content"] = string(stPost.Content)
 	c.Data["Title"] = stPost.Title
 }

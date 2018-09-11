@@ -155,8 +155,9 @@ func NewPost(Dir, FileName string) *TPost {
 	contentBody = strings.Replace(contentBody, "{{ site.url }}", "", -1)
 	newPost.Content = []byte(contentBody)
 
-	if len(newPost.Content) > 100 {
-		newPost.Abstraction = string(newPost.Content[:100])
+	abstractLen := beego.AppConfig.DefaultInt("PostAbstractionLen", 100)
+	if len(newPost.Content) > abstractLen {
+		newPost.Abstraction = string(newPost.Content[:abstractLen])
 	} else {
 		newPost.Abstraction = string(newPost.Content[:len(newPost.Content)])
 	}

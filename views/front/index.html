@@ -48,7 +48,7 @@
         <h4>Tags</h4>
         <ol class="list-unstyled">
             {{range $index, $value := .TagsArchives}}
-            <li><a href="#">{{$index}}({{($value|len)}})</a></li>
+            <li><a href="/tags/?tagname={{$index}}">{{$index}}({{($value|len)}})</a></li>
             {{end}}
         </ol>
         </div>

@@ -17,4 +17,5 @@ func init() {
 	beego.Router("/upload", &controllers.UploadController{})
 	beego.Router("/marked", &controllers.MarkedController{})
 	beego.Router("/posts/*", &controllers.PostController{})
+	beego.Router("/tags", &controllers.TagsController{})
 }
