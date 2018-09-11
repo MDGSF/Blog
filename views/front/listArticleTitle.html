@@ -1,7 +1,7 @@
 {{template "base/base.html" .}}
 
 {{define "meta"}}
-<title>{{.TagName}}</title>
+<title>{{.TitleName}}</title>
 <link href="/static/css/github-markdown.css" rel="stylesheet">
 {{end}}
 
@@ -10,12 +10,12 @@
 <div class="container">
 
 <div class="blog-header">
-  <h1 class="blog-title">{{.TagName}}</h1>
+  <h1 class="blog-title">{{.TitleName}}</h1>
 </div>
 
 <div class="row">
     {{range $index, $value := .Articles}}
-    <a href="{{.ReqURL}}" class="list-group-item">{{$value.Title}}</a>
+    <a href="{{.ReqURL}}" class="list-group-item">{{$value.Title}} {{$value.YearMonth}} {{$value.Author}}</a>
     {{end}}
 </div>
 

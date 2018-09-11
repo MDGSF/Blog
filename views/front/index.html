@@ -40,7 +40,7 @@
         <h4>Archives</h4>
         <ol class="list-unstyled">
             {{range $index, $value := .YearMonthArchives}}
-            <li><a href="#">{{$index}}({{($value|len)}})</a></li>
+            <li><a href="/yearmontharchives/?yearmonthname={{$index}}">{{$index}}({{($value|len)}})</a></li>
             {{end}}
         </ol>
         </div>

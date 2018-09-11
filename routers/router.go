@@ -18,4 +18,5 @@ func init() {
 	beego.Router("/marked", &controllers.MarkedController{})
 	beego.Router("/posts/*", &controllers.PostController{})
 	beego.Router("/tags", &controllers.TagsController{})
+	beego.Router("/yearmontharchives", &controllers.YearMonthController{})
 }

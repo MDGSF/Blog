@@ -32,6 +32,6 @@ func (c *TagsController) Get() {
 	}
 
 	c.TplName = "front/listArticleTitle.html"
-	c.Data["TagName"] = tagName
+	c.Data["TitleName"] = tagName
 	c.Data["Articles"] = postsArr
 }
