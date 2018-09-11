@@ -117,6 +117,9 @@ func NewPost(Dir, FileName string) *TPost {
 			case "layout":
 			case "title":
 				newPost.Title = lineParts[1]
+				newPost.Title = strings.TrimSpace(newPost.Title)
+				newPost.Title = strings.TrimPrefix(newPost.Title, "\"")
+				newPost.Title = strings.TrimSuffix(newPost.Title, "\"")
 			case "date":
 			case "author":
 				newPost.Author = lineParts[1]
@@ -140,6 +143,8 @@ func NewPost(Dir, FileName string) *TPost {
 
 	if len(newPost.Author) == 0 {
 		newPost.Author = beego.AppConfig.String("PostAuthor")
+	} else {
+		newPost.Author = strings.ToUpper(newPost.Author)
 	}
 
 	contentParts := strings.SplitN(string(content), headerSplit, 3)

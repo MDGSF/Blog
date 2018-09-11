@@ -15,7 +15,7 @@
 
 <div class="row">
     {{range $index, $value := .Articles}}
-    <a href="{{.ReqURL}}" class="list-group-item">{{$value.Title}} {{$value.YearMonth}} {{$value.Author}}</a>
+    <a href="{{.ReqURL}}" class="list-group-item"><h4>{{$value.Title}}</h4> {{$value.YearMonth}} {{$value.Author}}</a>
     {{end}}
 </div>
 
