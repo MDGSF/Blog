@@ -150,7 +150,10 @@ func NewPost(Dir, FileName string) *TPost {
 	// beego.Info("contentParts[1] =", contentParts[1]) // header
 	// beego.Info("contentParts[2] =", contentParts[2]) // content
 
-	newPost.Content = []byte(contentParts[2])
+	// process content
+	contentBody := contentParts[2]
+	contentBody = strings.Replace(contentBody, "{{ site.url }}", "", -1)
+	newPost.Content = []byte(contentBody)
 
 	if len(newPost.Content) > 100 {
 		newPost.Abstraction = string(newPost.Content[:100])
