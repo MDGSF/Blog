@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/MDGSF/Blog/setting"
 	"github.com/MDGSF/Blog/u"
 	"github.com/astaxie/beego"
 )
@@ -26,7 +27,6 @@ func init() {
 
 	MonthPosts = make(map[string][]*TPost)
 
-	LoadAllPostsDirectory()
 }
 
 var curYear int
@@ -57,15 +57,14 @@ var MonthPosts map[string][]*TPost
 
 // LoadAllPostsDirectory load all posts from all PostDirectory.
 func LoadAllPostsDirectory() {
-	postDirs := beego.AppConfig.Strings("PostDirectory")
-	beego.Info("postDirs =", postDirs)
-	for _, postDir := range postDirs {
+	for _, postDir := range setting.PostDirectory {
 		if !u.IsDir(postDir) {
 			continue
 		}
 
 		LoadOnePostDirectory(postDir)
 	}
+	beego.Info("load posts success, post number =", len(AllPosts))
 }
 
 var sema = make(chan struct{}, 20)

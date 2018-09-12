@@ -42,13 +42,13 @@ func NewPost(Dir, FileName string) *TPost {
 
 	fileBase := path.Base(newPost.FileName)
 	fileExt := path.Ext(newPost.FileName)
-	beego.Info("dir =", Dir)
-	beego.Info("FileName =", newPost.FileName)
-	beego.Info("fileBase =", fileBase)
-	beego.Info("fileExt =", fileExt)
+	// beego.Info("dir =", Dir)
+	// beego.Info("FileName =", newPost.FileName)
+	// beego.Info("fileBase =", fileBase)
+	// beego.Info("fileExt =", fileExt)
 
 	fileNameOnly := strings.TrimSuffix(fileBase, fileExt)
-	beego.Info("fileNameOnly =", fileNameOnly)
+	//beego.Info("fileNameOnly =", fileNameOnly)
 
 	fileNameParts := strings.Split(fileNameOnly, "-")
 	if len(fileNameParts) < 4 {
@@ -59,7 +59,7 @@ func NewPost(Dir, FileName string) *TPost {
 	strYear := fileNameParts[0]
 	strMonth := fileNameParts[1]
 	strDay := fileNameParts[2]
-	beego.Info("strYear, strMonth, strDay =", strYear, strMonth, strDay)
+	//beego.Info("strYear, strMonth, strDay =", strYear, strMonth, strDay)
 
 	iYear, _ := strconv.Atoi(strYear)
 	iMonth, _ := strconv.Atoi(strMonth)
