@@ -5,7 +5,21 @@
 {{end}}
 
 {{define "body"}}
+<div class="container">
+    <div class="row">
 
-hello
+        {{range $categoryname, $postarr := .categories}}
+        <h4>{{$categoryname}}</h4>
+        <ul>
+            {{range $postIndex, $post := $postarr}}
+            <li>
+                {{$post.YearMonth}}
+                <a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
+            </li>
+            {{end}}
+        </ul>
+        {{end}}
 
+    </div>
+</div>
 {{end}}

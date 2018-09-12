@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/MDGSF/Blog/controllers/base"
+	"github.com/MDGSF/Blog/models"
 	"github.com/astaxie/beego"
 )
 
@@ -16,4 +17,5 @@ func (c *CategoriesController) Get() {
 
 	c.TplName = "front/categories.html"
 	c.Data["IsCategory"] = true
+	c.Data["categories"] = models.MonthPosts
 }
