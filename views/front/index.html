@@ -40,7 +40,7 @@
         <h4>Archives</h4>
         <ol class="list-unstyled">
             {{range $index, $value := .YearMonthArchives}}
-            <li><a href="/yearmontharchives/?yearmonthname={{$index}}">{{$index}}({{($value|len)}})</a></li>
+            <li><a href="/yearmontharchives/?name={{$index}}">{{$index}}({{($value|len)}})</a></li>
             {{end}}
         </ol>
         </div>
@@ -48,7 +48,7 @@
         <h4>Tags</h4>
         <ol class="list-unstyled">
             {{range $index, $value := .TagsArchives}}
-            <li><a href="/tags/?tagname={{$index}}">{{$index}}({{($value|len)}})</a></li>
+            <li><a href="/tags/?name={{$index}}">{{$index}}({{($value|len)}})</a></li>
             {{end}}
         </ol>
         </div>

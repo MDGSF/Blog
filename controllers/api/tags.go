@@ -16,7 +16,7 @@ func (c *TagsController) Get() {
 
 	beego.Info("TagsController get", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
-	tagName := c.Ctx.Request.Form.Get("tagname")
+	tagName := c.Ctx.Request.Form.Get("name")
 	if len(tagName) == 0 {
 		beego.Error("no tag name")
 		return
@@ -31,4 +31,8 @@ func (c *TagsController) Get() {
 	c.TplName = "front/listArticleTitle.html"
 	c.Data["TitleName"] = tagName
 	c.Data["Articles"] = postsArr
+
+	c.Data["sidebarname"] = "Tags"
+	c.Data["sideContentURL"] = "/tags"
+	c.Data["sideArchives"] = models.AllPostsTags
 }

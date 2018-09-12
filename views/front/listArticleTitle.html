@@ -17,18 +17,11 @@
 
     <div class="col-sm-3 blog-sidebar">
       <div class="sidebar-module">
-        <h4>Archives</h4>
+        <h4>{{.sidebarname}}</h4>
         <ol class="list-unstyled">
-          {{range $index, $value := .YearMonthArchives}}
-          <li><a href="/yearmontharchives/?yearmonthname={{$index}}">{{$index}}({{($value|len)}})</a></li>
-          {{end}}
-        </ol>
-      </div>
-      <div class="sidebar-module">
-        <h4>Tags</h4>
-        <ol class="list-unstyled">
-          {{range $index, $value := .TagsArchives}}
-          <li><a href="/tags/?tagname={{$index}}">{{$index}}({{($value|len)}})</a></li>
+          {{range $index, $value := .sideArchives}}
+          <!-- <li><a href="{{$.sideContentURL}}{{$index}}">{{$index}}({{($value|len)}})</a></li> -->
+          <li><a href="{{$.sideContentURL}}/?name={{$index}}">{{$index}}({{($value|len)}})</a></li>
           {{end}}
         </ol>
       </div>
@@ -41,6 +34,7 @@
       </a>
       {{end}}
     </div>
+
   </div>
 
 </div> <!-- container -->

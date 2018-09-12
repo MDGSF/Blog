@@ -16,7 +16,7 @@ func (c *YearMonthController) Get() {
 
 	beego.Info("YearMonthController get", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
-	YearMonthName := c.Ctx.Request.Form.Get("yearmonthname")
+	YearMonthName := c.Ctx.Request.Form.Get("name")
 	if len(YearMonthName) == 0 {
 		beego.Error("no tag name")
 		return
@@ -31,6 +31,8 @@ func (c *YearMonthController) Get() {
 	c.TplName = "front/listArticleTitle.html"
 	c.Data["TitleName"] = YearMonthName
 	c.Data["Articles"] = postsArr
-	c.Data["YearMonthArchives"] = models.MonthPosts
-	c.Data["TagsArchives"] = models.AllPostsTags
+
+	c.Data["sidebarname"] = "Archives"
+	c.Data["sideContentURL"] = "/yearmontharchives"
+	c.Data["sideArchives"] = models.MonthPosts
 }
