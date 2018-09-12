@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	"strconv"
@@ -65,4 +65,5 @@ func (c *IndexController) Get() {
 
 	p := u.NewPaginator(c.Ctx.Request, pageLimit, pageCount)
 	c.Data["paginator"] = p
+	c.Data["Lang"] = "zh-CN"
 }

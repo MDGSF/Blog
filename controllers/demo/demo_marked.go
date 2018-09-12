@@ -1,4 +1,4 @@
-package controllers
+package demo
 
 import (
 	"io/ioutil"

@@ -4,6 +4,7 @@ import (
 	"github.com/MDGSF/Blog/models"
 	_ "github.com/MDGSF/Blog/routers"
 	"github.com/MDGSF/Blog/setting"
+	"github.com/beego/i18n"
 
 	"github.com/astaxie/beego"
 )
@@ -23,10 +24,13 @@ func initialize() {
 	initStaticDirectory()
 
 	models.LoadAllPostsDirectory()
+
+	beego.AddFuncMap("i18n", i18n.Tr)
 }
 
 func initStaticDirectory() {
 	// use http://127.0.0.1:8080/static/css/blog.css to access "static" directory.
+	// beego.SetStaticPath("/static", "static") // this is set default.
 
 	// use http://localhost:8080/down1/123.txt to access directory "download1/123.txt"
 	beego.SetStaticPath("/down1", "download1")

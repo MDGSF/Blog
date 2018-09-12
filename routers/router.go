@@ -1,23 +1,25 @@
 package routers
 
 import (
-	"github.com/MDGSF/Blog/controllers"
+	"github.com/MDGSF/Blog/controllers/api"
+	"github.com/MDGSF/Blog/controllers/demo"
 
 	"github.com/astaxie/beego"
 )
 
 func init() {
-	beego.Router("/", &controllers.IndexController{})
-	beego.Router("/pg", &controllers.IndexController{})
 
-	beego.Router("/default", &controllers.MainController{})
-	beego.Router("/layui", &controllers.LayuiController{})
-	beego.Router("/bootstrap", &controllers.BootstrapController{})
-	beego.Router("/login", &controllers.LoginController{})
-	beego.Router("/upload", &controllers.UploadController{})
-	beego.Router("/marked", &controllers.MarkedController{})
-	beego.Router("/posts/*", &controllers.PostController{})
-	beego.Router("/tags", &controllers.TagsController{})
-	beego.Router("/yearmontharchives", &controllers.YearMonthController{})
-	beego.Router("/search", &controllers.SearchController{})
+	beego.Router("/default", &demo.MainController{})
+	beego.Router("/layui", &demo.LayuiController{})
+	beego.Router("/bootstrap", &demo.BootstrapController{})
+	beego.Router("/login", &demo.LoginController{})
+	beego.Router("/upload", &demo.UploadController{})
+	beego.Router("/marked", &demo.MarkedController{})
+
+	beego.Router("/", &api.IndexController{})
+	beego.Router("/pg", &api.IndexController{})
+	beego.Router("/posts/*", &api.PostController{})
+	beego.Router("/tags", &api.TagsController{})
+	beego.Router("/yearmontharchives", &api.YearMonthController{})
+	beego.Router("/search", &api.SearchController{})
 }

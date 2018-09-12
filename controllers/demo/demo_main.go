@@ -1,4 +1,4 @@
-package controllers
+package demo
 
 import (
 	"github.com/astaxie/beego"

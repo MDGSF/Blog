@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	"github.com/MDGSF/Blog/models"
