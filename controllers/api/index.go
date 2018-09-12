@@ -15,11 +15,6 @@ type IndexController struct {
 
 // Get main controller get
 func (c *IndexController) Get() {
-
-	if c.Ctx.Request.Form == nil {
-		c.Ctx.Request.ParseForm()
-	}
-
 	beego.Info("IndexController get", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
 	pageCount := len(models.AllPosts)
@@ -61,7 +56,7 @@ func (c *IndexController) Get() {
 
 	c.Data["Posts"] = models.AllPosts[start:end]
 	c.Data["YearMonthArchives"] = models.MonthPosts
-	c.Data["TagsArchives"] = models.AllPostsTags
+	c.Data["TagsArchives"] = models.PostsTagsManyPost
 	c.Data["IsHome"] = true
 
 	c.SetPaginator(pageLimit, int64(pageCount))

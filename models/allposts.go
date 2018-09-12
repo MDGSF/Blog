@@ -24,9 +24,10 @@ func init() {
 	AllPostsName = make(map[string]*TPost)
 
 	AllPostsTags = make(map[string][]*TPost)
+	PostsTagsManyPost = make(map[string][]*TPost)
+	PostsTagsLittlePost = make(map[string][]*TPost)
 
 	MonthPosts = make(map[string][]*TPost)
-
 }
 
 var curYear int
@@ -51,6 +52,12 @@ var AllPostsName map[string]*TPost
 
 // AllPostsTags key: tag name, value: post array.
 var AllPostsTags map[string][]*TPost
+
+// PostsTagsManyPost if one tags has more than 5 posts, store in here.
+var PostsTagsManyPost map[string][]*TPost
+
+// PostsTagsLittlePost if one tags has less than 5 posts, store in here.
+var PostsTagsLittlePost map[string][]*TPost
 
 // MonthPosts key: year-month, value: post array.
 var MonthPosts map[string][]*TPost
@@ -128,6 +135,14 @@ loop:
 			MonthPosts[post.YearMonth] = make([]*TPost, 0)
 		}
 		MonthPosts[post.YearMonth] = append(MonthPosts[post.YearMonth], AllPosts[k])
+	}
+
+	for k, v := range AllPostsTags {
+		if len(v) < 5 {
+			PostsTagsLittlePost[k] = AllPostsTags[k]
+		} else {
+			PostsTagsManyPost[k] = AllPostsTags[k]
+		}
 	}
 }
 
