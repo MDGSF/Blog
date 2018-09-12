@@ -22,4 +22,6 @@ func init() {
 	beego.Router("/tags", &api.TagsController{})
 	beego.Router("/yearmontharchives", &api.YearMonthController{})
 	beego.Router("/search", &api.SearchController{})
+	beego.Router("/about", &api.AboutController{})
+	beego.Router("/categories", &api.CategoriesController{})
 }

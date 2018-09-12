@@ -17,6 +17,10 @@ var (
 	AdminAddr   string
 	AdminPort   string
 
+	AppVersion     string
+	AppAuthor      string
+	AppAuthorEmail string
+
 	PostDirectory      []string
 	PostAuthor         string
 	PostAbstractionLen int
@@ -43,6 +47,10 @@ func settingGlobalVariables() {
 	AdminAddr = beego.AppConfig.DefaultString("AdminAddr", "localhost")
 	AdminPort = beego.AppConfig.DefaultString("AdminPort", "8088")
 
+	AppVersion = beego.AppConfig.DefaultString("AppVersion", "1.0.0.1")
+	AppAuthor = beego.AppConfig.DefaultString("AppAuthor", "author")
+	AppAuthorEmail = beego.AppConfig.DefaultString("AppAuthorEmail", "xxx@email.com")
+
 	PostDirectory = beego.AppConfig.Strings("PostDirectory")
 	PostAuthor = beego.AppConfig.DefaultString("PostAuthor", "author")
 	PostAbstractionLen = beego.AppConfig.DefaultInt("PostAbstractionLen", 100)
@@ -54,6 +62,10 @@ func settingGlobalVariables() {
 	beego.Info("EnableAdmin =", EnableAdmin)
 	beego.Info("AdminAddr =", AdminAddr)
 	beego.Info("AdminPort =", AdminPort)
+
+	beego.Info("AppVersion =", AppVersion)
+	beego.Info("AppAuthor =", AppAuthor)
+	beego.Info("AppAuthorEmail =", AppAuthorEmail)
 
 	beego.Info("PostDirectory =", PostDirectory)
 	beego.Info("PostAuthor =", PostAuthor)

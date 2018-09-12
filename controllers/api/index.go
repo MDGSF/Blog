@@ -62,6 +62,7 @@ func (c *IndexController) Get() {
 	c.Data["Posts"] = models.AllPosts[start:end]
 	c.Data["YearMonthArchives"] = models.MonthPosts
 	c.Data["TagsArchives"] = models.AllPostsTags
+	c.Data["IsHome"] = true
 
 	c.SetPaginator(pageLimit, int64(pageCount))
 }
