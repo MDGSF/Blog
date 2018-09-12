@@ -31,4 +31,6 @@ func (c *YearMonthController) Get() {
 	c.TplName = "front/listArticleTitle.html"
 	c.Data["TitleName"] = YearMonthName
 	c.Data["Articles"] = postsArr
+	c.Data["YearMonthArchives"] = models.MonthPosts
+	c.Data["TagsArchives"] = models.AllPostsTags
 }
