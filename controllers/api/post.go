@@ -1,13 +1,14 @@
 package api
 
 import (
+	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/models"
 	"github.com/astaxie/beego"
 )
 
 // PostController main controller
 type PostController struct {
-	beego.Controller
+	base.Controller
 }
 
 // Get main controller get

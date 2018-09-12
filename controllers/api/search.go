@@ -3,20 +3,20 @@ package api
 import (
 	"strings"
 
+	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/models"
 	"github.com/astaxie/beego"
 )
 
 // SearchController search controller
 type SearchController struct {
-	beego.Controller
+	base.Controller
 }
 
 // Post search controller post
 func (c *SearchController) Post() {
 
 	r := c.Ctx.Request
-	r.ParseForm()
 	beego.Info("SearchController get", c.Ctx.Input.Params(), r.Form, r.PostForm, r.URL.Path, r.URL.Scheme)
 
 	searchContent := r.Form.Get("searchContent")

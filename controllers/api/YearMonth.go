@@ -1,21 +1,18 @@
 package api
 
 import (
+	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/models"
 	"github.com/astaxie/beego"
 )
 
 // YearMonthController main controller
 type YearMonthController struct {
-	beego.Controller
+	base.Controller
 }
 
 // Get main controller get
 func (c *YearMonthController) Get() {
-
-	if c.Ctx.Request.Form == nil {
-		c.Ctx.Request.ParseForm()
-	}
 
 	beego.Info("YearMonthController get", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 

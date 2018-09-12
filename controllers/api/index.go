@@ -3,14 +3,14 @@ package api
 import (
 	"strconv"
 
+	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/models"
-	"github.com/MDGSF/Blog/u"
 	"github.com/astaxie/beego"
 )
 
 // IndexController main controller
 type IndexController struct {
-	beego.Controller
+	base.Controller
 }
 
 // Get main controller get
@@ -63,7 +63,5 @@ func (c *IndexController) Get() {
 	c.Data["YearMonthArchives"] = models.MonthPosts
 	c.Data["TagsArchives"] = models.AllPostsTags
 
-	p := u.NewPaginator(c.Ctx.Request, pageLimit, pageCount)
-	c.Data["paginator"] = p
-	c.Data["Lang"] = "zh-CN"
+	c.SetPaginator(pageLimit, int64(pageCount))
 }
