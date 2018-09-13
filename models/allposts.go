@@ -34,8 +34,11 @@ func init() {
 
 var curYear int
 
-// AllPosts store all posts information.
+// AllPosts store all posts information sort by time asc.
 var AllPosts []*TPost
+
+// AllPostsReverseByTime store all posts information sort by time desc.
+var AllPostsReverseByTime []*TPost
 
 // ByTime sort AllPosts array by post time.
 type ByTime []*TPost
@@ -118,6 +121,14 @@ loop:
 	}
 
 	sort.Sort(ByTime(AllPosts))
+
+	postsNum := len(AllPosts)
+	AllPostsReverseByTime = make([]*TPost, postsNum)
+	i := postsNum - 1
+	for k := range AllPosts {
+		AllPostsReverseByTime[i] = AllPosts[k]
+		i--
+	}
 
 	for k, post := range AllPosts {
 		AllPostsFileName[post.FileName] = AllPosts[k]

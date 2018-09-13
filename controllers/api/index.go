@@ -54,7 +54,7 @@ func (c *IndexController) Get() {
 
 	beego.Info(pageCount, pageLimit, curPageIndex, curPage, start, end)
 
-	c.Data["Posts"] = models.AllPosts[start:end]
+	c.Data["Posts"] = models.AllPostsReverseByTime[start:end]
 	c.Data["YearMonthArchives"] = models.MonthPosts
 	c.Data["TagsArchives"] = models.PostsTagsManyPost
 	c.Data["IsHome"] = true
