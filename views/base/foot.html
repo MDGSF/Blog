@@ -1,8 +1,28 @@
-<footer class="blog-footer">
-<p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-<p>
-    <a href="#">Back to top</a>
-</p>
+<footer id="footer" class="blog-footer">
+    <div class="container">
+    <div class="row footer-wrap">
+    <div class="col-md-12 desc">
+
+        <div class="pull-right">
+            <strong>{{i18n .Lang "language_choice"}}: </strong>
+            <div class="btn-group dropup">
+                <button type="button" class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown">{{i18n .Lang .Lang}} <i class="caret"></i></button>
+                <ul class="dropdown-menu">
+                    {{range .Langs}}
+                    <li><a href="javascript::" data-lang="{{.}}" class="lang-changed">{{i18n $.Lang .}}</a></li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+
+        <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+
+        <p><a href="#">Back to top</a></p>
+
+    </div>
+    </div>
+    </div>
+    <input type="hidden" name="_once" value="{{.once_token}}" style="display:none;" />
 </footer>
 
 
@@ -11,5 +31,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="/static/js/js.cookie-2.2.0.min.js"></script>
 
 <script src="/static/js/blog.js"></script>
+<script src="/static/js/main.js"></script>

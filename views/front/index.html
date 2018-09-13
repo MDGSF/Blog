@@ -56,16 +56,16 @@
         <h4>Elsewhere</h4>
         <ol class="list-unstyled">
             {{if .AppAuthorEmail|len}}
-            <li><a href="mailto:{{.AppAuthorEmail}}">{{i18n .Lang "email"}}</a></li>
+            <li><a target="_blank" href="mailto:{{.AppAuthorEmail}}">{{i18n .Lang "email"}}</a></li>
             {{end}}
             {{if .AppAuthorGitHub|len}}
-            <li><a href="{{.AppAuthorGitHub}}">GitHub</a></li>
+            <li><a target="_blank" href="{{.AppAuthorGitHub}}">GitHub</a></li>
             {{end}}
             {{if .AppAuthorTwitter|len}}
-            <li><a href="#">{{i18n .Lang "Twitter"}}</a></li>
+            <li><a target="_blank" href="{{.AppAuthorTwitter}}">{{i18n .Lang "Twitter"}}</a></li>
             {{end}}
             {{if .AppAuthorFacebook|len}}
-            <li><a href="#">{{i18n .Lang "Facebook"}}</a></li>
+            <li><a target="_blank" href="{{.AppAuthorFacebook}}">{{i18n .Lang "Facebook"}}</a></li>
             {{end}}
         </ol>
         </div>

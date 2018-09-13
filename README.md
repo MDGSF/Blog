@@ -16,6 +16,8 @@ https://v3.bootcss.com/getting-started/
 
 https://github.com/google/re2/wiki/Syntax
 
+https://github.com/js-cookie/js-cookie
+
 
 ### i18n
 
