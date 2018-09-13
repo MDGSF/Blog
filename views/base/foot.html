@@ -4,9 +4,12 @@
     <div class="col-md-12 desc">
 
         <div class="pull-right">
-            <strong>{{i18n .Lang "language_choice"}}: </strong>
             <div class="btn-group dropup">
-                <button type="button" class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown">{{i18n .Lang .Lang}} <i class="caret"></i></button>
+                <button type="button" class="btn btn-default btn-md dropdown-toggle" data-toggle="dropdown">
+                    <strong>{{i18n .Lang "language_choice"}}: </strong>{{i18n .Lang .Lang}} 
+                    <i class="caret">
+                    </i>
+                </button>
                 <ul class="dropdown-menu">
                     {{range .Langs}}
                     <li><a href="javascript::" data-lang="{{.}}" class="lang-changed">{{i18n $.Lang .}}</a></li>
