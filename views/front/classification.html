@@ -1,0 +1,55 @@
+{{template "base/base.html" .}}
+
+{{define "meta"}}
+<title>Blog Template for Bootstrap</title>
+{{end}}
+
+{{define "body"}}
+<div class="container">
+    <div class="row">
+
+        <ul id="classificationTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#classificationCategory" data-toggle="tab">
+                    {{i18n .Lang "classification.tr_category"}}
+                </a>
+            </li>
+            <li>
+                <a href="#classificationYearMonth" data-toggle="tab">
+                    {{i18n .Lang "classification.tr_yearmonth"}}
+                </a>
+            </li>
+        </ul>
+
+        <div id="classificationTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="classificationCategory">
+                {{range $categoryname, $postarr := .classificationCategory}}
+                <h4>{{$categoryname}}</h4>
+                <ul>
+                    {{range $postIndex, $post := $postarr}}
+                    <li>
+                        {{$post.YearMonth}}
+                        <a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
+                    </li>
+                    {{end}}
+                </ul>
+                {{end}}
+            </div>
+            <div class="tab-pane fade in active" id="classificationYearMonth">
+                {{range $categoryname, $postarr := .classificationYearMonth}}
+                <h4>{{$categoryname}}</h4>
+                <ul>
+                    {{range $postIndex, $post := $postarr}}
+                    <li>
+                        {{$post.YearMonth}}
+                        <a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
+                    </li>
+                    {{end}}
+                </ul>
+                {{end}}
+            </div>
+        </div>
+
+    </div>
+</div>
+{{end}}

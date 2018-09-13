@@ -28,6 +28,8 @@ func init() {
 	PostsTagsLittlePost = make(map[string][]*TPost)
 
 	MonthPosts = make(map[string][]*TPost)
+
+	PostsCategory = make(map[string][]*TPost)
 }
 
 var curYear int
@@ -44,23 +46,26 @@ func (s ByTime) Less(i, j int) bool {
 	return s[i].Time.Before(s[j].Time)
 }
 
-// AllPostsFileName key: file name, value : TPost.
+// AllPostsFileName : 文件名索引, key: file name, value : TPost.
 var AllPostsFileName map[string]*TPost
 
-// AllPostsName key: post name, value : TPost.
+// AllPostsName : 标题索引, key: post name, value : TPost.
 var AllPostsName map[string]*TPost
 
-// AllPostsTags key: tag name, value: post array.
+// AllPostsTags : 按标签分类, key: tag name, value: post array.
 var AllPostsTags map[string][]*TPost
 
-// PostsTagsManyPost if one tags has more than 5 posts, store in here.
+// PostsTagsManyPost : 按标签分类（数量大于等于5）, if one tags has more than 5 posts, store in here.
 var PostsTagsManyPost map[string][]*TPost
 
-// PostsTagsLittlePost if one tags has less than 5 posts, store in here.
+// PostsTagsLittlePost : 按标签分类（数量小于5）, if one tags has less than 5 posts, store in here.
 var PostsTagsLittlePost map[string][]*TPost
 
-// MonthPosts key: year-month, value: post array.
+// MonthPosts : 按日期分类（年-月）, key: year-month, value: post array.
 var MonthPosts map[string][]*TPost
+
+// PostsCategory : 按类型分类, key: category, value: post array.
+var PostsCategory map[string][]*TPost
 
 // LoadAllPostsDirectory load all posts from all PostDirectory.
 func LoadAllPostsDirectory() {
@@ -135,6 +140,12 @@ loop:
 			MonthPosts[post.YearMonth] = make([]*TPost, 0)
 		}
 		MonthPosts[post.YearMonth] = append(MonthPosts[post.YearMonth], AllPosts[k])
+
+		_, ok = PostsCategory[post.Categories]
+		if !ok {
+			PostsCategory[post.Categories] = make([]*TPost, 0)
+		}
+		PostsCategory[post.Categories] = append(PostsCategory[post.Categories], AllPosts[k])
 	}
 
 	for k, v := range AllPostsTags {
