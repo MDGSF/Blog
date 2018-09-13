@@ -17,9 +17,12 @@ var (
 	AdminAddr   string
 	AdminPort   string
 
-	AppVersion     string
-	AppAuthor      string
-	AppAuthorEmail string
+	AppVersion        string
+	AppAuthor         string
+	AppAuthorEmail    string
+	AppAuthorGitHub   string
+	AppAuthorTwitter  string
+	AppAuthorFacebook string
 
 	PostDirectory      []string
 	PostAuthor         string
@@ -50,6 +53,9 @@ func settingGlobalVariables() {
 	AppVersion = beego.AppConfig.DefaultString("AppVersion", "1.0.0.1")
 	AppAuthor = beego.AppConfig.DefaultString("AppAuthor", "author")
 	AppAuthorEmail = beego.AppConfig.DefaultString("AppAuthorEmail", "xxx@email.com")
+	AppAuthorGitHub = beego.AppConfig.DefaultString("AppAuthorGitHub", "")
+	AppAuthorTwitter = beego.AppConfig.DefaultString("AppAuthorTwitter", "")
+	AppAuthorFacebook = beego.AppConfig.DefaultString("AppAuthorFacebook", "")
 
 	PostDirectory = beego.AppConfig.Strings("PostDirectory")
 	PostAuthor = beego.AppConfig.DefaultString("PostAuthor", "author")

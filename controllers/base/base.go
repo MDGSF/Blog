@@ -22,9 +22,13 @@ func (c *Controller) Prepare() {
 
 	c.setLang()
 
-	c.Data["Website"] = setting.AppName
-	c.Data["Email"] = setting.AppAuthorEmail
-	c.Data["Author"] = setting.AppAuthor
+	c.Data["AppName"] = setting.AppName
+	c.Data["AppVersion"] = setting.AppVersion
+	c.Data["AppAuthor"] = setting.AppAuthor
+	c.Data["AppAuthorEmail"] = setting.AppAuthorEmail
+	c.Data["AppAuthorGitHub"] = setting.AppAuthorGitHub
+	c.Data["AppAuthorTwitter"] = setting.AppAuthorTwitter
+	c.Data["AppAuthorFacebook"] = setting.AppAuthorFacebook
 }
 
 // Finish on router finished
