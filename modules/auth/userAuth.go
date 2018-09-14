@@ -2,25 +2,37 @@ package auth
 
 import (
 	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 	"log"
 
+	"github.com/MDGSF/Blog/modules/models"
 	"golang.org/x/crypto/scrypt"
 )
 
-func HashUserPassword(password []byte) []byte {
+// HashUserPassword encrypt user password
+func HashUserPassword(password string, salt string) string {
 
-	salt := []byte{0xc8, 0x28, 0xf2, 0x58, 0xa7, 0x6a, 0xad, 0x7b}
-
-	dk, err := scrypt.Key([]byte("some password"), salt, 1<<15, 8, 1, 32)
+	dk, err := scrypt.Key([]byte(password), []byte(salt), 1<<15, 8, 1, 32)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(base64.StdEncoding.EncodeToString(dk))
 
-	return dk
+	return hex.EncodeToString(dk)
 }
 
-func RegisterUser(userName, password string) {
+// RegisterUser register user to db
+func RegisterUser(username, password, email string) error {
 
+	user := &models.TUser{}
+
+	salt := models.GetUserSalt()
+	pwd := HashUserPassword(password, salt)
+
+	user.UserName = username
+	user.PassWord = fmt.Sprintf("%s$%s", salt, pwd)
+	user.Email = email
+	user.NickName = username
+	return user.Create()
 }

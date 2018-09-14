@@ -1,6 +1,10 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/MDGSF/Blog/u"
+)
 
 // TUser table UserInfo
 type TUser struct {
@@ -19,8 +23,11 @@ func (TUser) TableName() string {
 }
 
 // Create create a new user.
-func (user *TUser) Create() {
-	gDB.Create(user)
+func (user *TUser) Create() error {
+	if err := gDB.Create(user).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 // Query query one user info.
@@ -36,4 +43,9 @@ func (user *TUser) Update() {
 // Delete delete one user.
 func (user *TUser) Delete() {
 	gDB.Delete(user)
+}
+
+// GetUserSalt return a user salt token
+func GetUserSalt() string {
+	return u.GetRandomString(8)
 }

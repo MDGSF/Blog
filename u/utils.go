@@ -1,6 +1,7 @@
 package u
 
 import (
+	"crypto/rand"
 	"fmt"
 	"os"
 	"reflect"
@@ -64,4 +65,15 @@ func ToInt64(value interface{}) (d int64, err error) {
 		err = fmt.Errorf("ToInt64 need numeric not `%T`", value)
 	}
 	return
+}
+
+// GetRandomString generate random string
+func GetRandomString(n int) string {
+	const alphanum = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	var bytes = make([]byte, n)
+	rand.Read(bytes)
+	for i, b := range bytes {
+		bytes[i] = alphanum[b%byte(len(alphanum))]
+	}
+	return string(bytes)
 }
