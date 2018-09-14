@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"github.com/MDGSF/Blog/controllers/admin"
 	"github.com/MDGSF/Blog/controllers/api"
 	"github.com/MDGSF/Blog/controllers/demo"
 
@@ -24,4 +25,6 @@ func init() {
 	beego.Router("/search", &api.SearchController{})
 	beego.Router("/about", &api.AboutController{})
 	beego.Router("/classification", &api.ClassificationController{})
+
+	beego.Router("/admin/login", &admin.LoginController{})
 }
