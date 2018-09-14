@@ -13,8 +13,8 @@ type TUser struct {
 	UserName    string `gorm:"type:varchar(255);unique_index"`
 	PassWord    string `gorm:"type:varchar(255)"`
 	NickName    string `gorm:"type:varchar(255)"`
-	Email       string `gorm:"type:varchar(255);unique_index"`
-	PhoneNumber string `gorm:"type:varchar(255);unique_index"`
+	Email       string `gorm:"type:varchar(255)"`
+	PhoneNumber string `gorm:"type:varchar(255)"`
 }
 
 // TableName TUser table name
@@ -31,8 +31,11 @@ func (user *TUser) Create() error {
 }
 
 // Query query one user info.
-func (user *TUser) Query() {
-	gDB.Where(user).First(user)
+func (user *TUser) Query() error {
+	if err := gDB.Where(user).First(user).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 // Update update one user info.

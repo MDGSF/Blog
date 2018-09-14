@@ -22,6 +22,17 @@ func HashUserPassword(password string, salt string) string {
 	return hex.EncodeToString(dk)
 }
 
+// IsUserExist judge whether username exist in db.
+func IsUserExist(username string) bool {
+	user := &models.TUser{}
+	user.UserName = username
+
+	if err := user.Query(); err != nil {
+		return false
+	}
+	return true
+}
+
 // RegisterUser register user to db
 func RegisterUser(username, password, email string) error {
 
