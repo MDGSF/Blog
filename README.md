@@ -18,6 +18,8 @@ https://github.com/google/re2/wiki/Syntax
 
 https://github.com/js-cookie/js-cookie
 
+https://github.com/jinzhu/gorm
+
 
 ### i18n
 

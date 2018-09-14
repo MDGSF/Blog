@@ -17,6 +17,12 @@ var (
 	AdminAddr   string
 	AdminPort   string
 
+	DBHost     string
+	DBPort     string
+	DBUser     string
+	DBPassWord string
+	DBName     string
+
 	AppVersion        string
 	AppAuthor         string
 	AppAuthorEmail    string
@@ -49,6 +55,12 @@ func settingGlobalVariables() {
 	EnableAdmin = beego.AppConfig.DefaultBool("EnableAdmin", false)
 	AdminAddr = beego.AppConfig.DefaultString("AdminAddr", "localhost")
 	AdminPort = beego.AppConfig.DefaultString("AdminPort", "8088")
+
+	DBHost = beego.AppConfig.DefaultString("DBHost", "localhost")
+	DBPort = beego.AppConfig.DefaultString("DBPort", "3306")
+	DBUser = beego.AppConfig.DefaultString("DBUser", "root")
+	DBPassWord = beego.AppConfig.DefaultString("DBPassWord", "123456")
+	DBName = beego.AppConfig.DefaultString("DBName", "db_name")
 
 	AppVersion = beego.AppConfig.DefaultString("AppVersion", "1.0.0.1")
 	AppAuthor = beego.AppConfig.DefaultString("AppAuthor", "author")

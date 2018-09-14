@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/MDGSF/Blog/models"
+	"github.com/MDGSF/Blog/models/db"
 	_ "github.com/MDGSF/Blog/routers"
 	"github.com/MDGSF/Blog/setting"
 	"github.com/beego/i18n"
@@ -23,9 +24,11 @@ func initialize() {
 
 	initStaticDirectory()
 
+	beego.AddFuncMap("i18n", i18n.Tr)
+
 	models.LoadAllPostsDirectory()
 
-	beego.AddFuncMap("i18n", i18n.Tr)
+	db.Start()
 }
 
 func initStaticDirectory() {
