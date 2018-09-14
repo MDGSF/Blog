@@ -1,4 +1,4 @@
-package db
+package models
 
 import (
 	"fmt"
@@ -17,8 +17,8 @@ documents at here: http://gorm.io/docs/
 
 var gDB *gorm.DB
 
-// Start start db connection
-func Start() {
+// DBStart start db connection
+func DBStart() {
 	var err error
 	sqlSetting := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local",
 		setting.DBUser, setting.DBPassWord, setting.DBHost, setting.DBPort, setting.DBName)

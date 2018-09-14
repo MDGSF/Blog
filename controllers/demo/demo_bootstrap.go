@@ -3,7 +3,7 @@ package demo
 import (
 	"strconv"
 
-	"github.com/MDGSF/Blog/models"
+	"github.com/MDGSF/Blog/modules/models"
 	"github.com/MDGSF/Blog/u"
 	"github.com/astaxie/beego"
 )

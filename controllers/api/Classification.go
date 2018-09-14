@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/MDGSF/Blog/controllers/base"
-	"github.com/MDGSF/Blog/models"
+	"github.com/MDGSF/Blog/modules/models"
 	"github.com/astaxie/beego"
 )
 

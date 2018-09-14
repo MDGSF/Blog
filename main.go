@@ -1,8 +1,7 @@
 package main
 
 import (
-	"github.com/MDGSF/Blog/models"
-	"github.com/MDGSF/Blog/models/db"
+	"github.com/MDGSF/Blog/modules/models"
 	_ "github.com/MDGSF/Blog/routers"
 	"github.com/MDGSF/Blog/setting"
 	"github.com/beego/i18n"
@@ -28,7 +27,7 @@ func initialize() {
 
 	models.LoadAllPostsDirectory()
 
-	db.Start()
+	models.DBStart()
 }
 
 func initStaticDirectory() {

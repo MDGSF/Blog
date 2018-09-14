@@ -20,6 +20,8 @@ https://github.com/js-cookie/js-cookie
 
 https://github.com/jinzhu/gorm
 
+https://godoc.org/golang.org/x/crypto/scrypt
+
 
 ### i18n
 
