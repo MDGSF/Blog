@@ -12,8 +12,6 @@ https://github.com/markedjs/marked
 
 https://www.jianshu.com/u/22bd5745c432
 
-https://v3.bootcss.com/getting-started/
-
 https://github.com/google/re2/wiki/Syntax
 
 https://github.com/js-cookie/js-cookie
@@ -21,6 +19,16 @@ https://github.com/js-cookie/js-cookie
 https://github.com/jinzhu/gorm
 
 https://godoc.org/golang.org/x/crypto/scrypt
+
+https://github.com/twbs/bootstrap
+
+http://getbootstrap.com/docs/4.1/examples/
+
+https://v3.bootcss.com/getting-started/
+
+http://www.runoob.com/bootstrap4/bootstrap4-tutorial.html
+
+https://github.com/nauvalazhar/my-login
 
 
 ### i18n

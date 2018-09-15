@@ -16,7 +16,7 @@ type RegisterController struct {
 func (c *RegisterController) Get() {
 	beego.Info("RegisterController get")
 
-	c.TplName = "admin/login/index.html"
+	c.TplName = "admin/basic/register.html"
 }
 
 // Post controller Post
@@ -27,7 +27,7 @@ func (c *RegisterController) Post() {
 	password := c.Ctx.Request.Form.Get("form-password")
 	email := c.Ctx.Request.Form.Get("form-email")
 
-	beego.Info("username, password =", username, password)
+	beego.Info("username, password, email =", username, password, email)
 
 	if len(username) == 0 || len(password) == 0 {
 		beego.Error("Invalid username or password")
@@ -40,10 +40,10 @@ func (c *RegisterController) Post() {
 		return
 	}
 
-	if !auth.IsUserExist(username) {
+	if auth.IsUserExist(username) {
 		beego.Error("username already exist in db.")
 		return
 	}
 
-	c.TplName = "admin/login/index.html"
+	c.TplName = "admin/basic/register.html"
 }
