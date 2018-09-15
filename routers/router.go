@@ -26,6 +26,7 @@ func init() {
 	beego.Router("/about", &api.AboutController{})
 	beego.Router("/classification", &api.ClassificationController{})
 
+	beego.Router("/admin", &admin.AdminController{})
 	beego.Router("/admin/login", &admin.LoginController{})
 	beego.Router("/admin/register", &admin.RegisterController{})
 	beego.Router("/admin/resetpwd", &admin.ResetPasswordController{})
