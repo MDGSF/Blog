@@ -22,8 +22,8 @@ func (c *LoginController) Get() {
 func (c *LoginController) Post() {
 	beego.Info("LoginController post", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
-	username := c.Ctx.Request.Form.Get("form-username")
-	password := c.Ctx.Request.Form.Get("form-password")
+	username := c.Ctx.Request.Form.Get("name")
+	password := c.Ctx.Request.Form.Get("password")
 
 	beego.Info("username, password =", username, password)
 

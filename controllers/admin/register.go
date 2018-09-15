@@ -14,13 +14,6 @@ type RegisterController struct {
 	base.Controller
 }
 
-// Get controller get
-func (c *RegisterController) Get() {
-	beego.Info("RegisterController get")
-
-	c.TplName = "admin/basic/register.html"
-}
-
 // Post controller Post
 func (c *RegisterController) Post() {
 	beego.Info("RegisterController post", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
@@ -66,6 +59,6 @@ func (c *RegisterController) Post() {
 		return
 	}
 
-	c.Redirect("admin/basic/login.html", 301)
-	// c.TplName = "admin/basic/login.html"
+	// c.Redirect("admin/gentelella-1.4.0/production/login.html", 301)
+	c.TplName = "admin/gentelella-1.4.0/production/login.html"
 }
