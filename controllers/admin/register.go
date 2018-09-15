@@ -14,6 +14,13 @@ type RegisterController struct {
 	base.Controller
 }
 
+// Get controller get
+func (c *RegisterController) Get() {
+	beego.Info("RegisterController get")
+
+	c.TplName = "admin/gentelella-1.4.0/production/register.html"
+}
+
 // Post controller Post
 func (c *RegisterController) Post() {
 	beego.Info("RegisterController post", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
