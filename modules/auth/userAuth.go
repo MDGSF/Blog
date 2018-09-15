@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"encoding/base64"
 	"encoding/hex"
 	"fmt"
 	"log"
@@ -17,7 +16,7 @@ func HashUserPassword(password string, salt string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(base64.StdEncoding.EncodeToString(dk))
+	// fmt.Println(base64.StdEncoding.EncodeToString(dk))
 
 	return hex.EncodeToString(dk)
 }
@@ -26,6 +25,17 @@ func HashUserPassword(password string, salt string) string {
 func IsUserExist(username string) bool {
 	user := &models.TUser{}
 	user.UserName = username
+
+	if err := user.Query(); err != nil {
+		return false
+	}
+	return true
+}
+
+// IsEmailExist judge whether email exist in db.
+func IsEmailExist(email string) bool {
+	user := &models.TUser{}
+	user.Email = email
 
 	if err := user.Query(); err != nil {
 		return false

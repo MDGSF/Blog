@@ -1,6 +1,8 @@
 package admin
 
 import (
+	"fmt"
+
 	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/modules/auth"
 	"github.com/astaxie/beego"
@@ -23,9 +25,9 @@ func (c *RegisterController) Get() {
 func (c *RegisterController) Post() {
 	beego.Info("RegisterController post", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
-	username := c.Ctx.Request.Form.Get("form-username")
-	password := c.Ctx.Request.Form.Get("form-password")
-	email := c.Ctx.Request.Form.Get("form-email")
+	username := c.Ctx.Request.Form.Get("name")
+	password := c.Ctx.Request.Form.Get("password")
+	email := c.Ctx.Request.Form.Get("email")
 
 	beego.Info("username, password, email =", username, password, email)
 
@@ -41,9 +43,29 @@ func (c *RegisterController) Post() {
 	}
 
 	if auth.IsUserExist(username) {
-		beego.Error("username already exist in db.")
+		strError := "username already exist in db."
+		beego.Error(strError)
+		c.TplName = "admin/basic/errormsg.html"
+		c.Data["error"] = strError
 		return
 	}
 
-	c.TplName = "admin/basic/register.html"
+	if auth.IsEmailExist(email) {
+		strError := "email already exist in db."
+		beego.Error(strError)
+		c.TplName = "admin/basic/errormsg.html"
+		c.Data["error"] = strError
+		return
+	}
+
+	if err := auth.RegisterUser(username, password, email); err != nil {
+		strError := fmt.Sprintf("register to db failed, err = %v", err)
+		beego.Error(strError)
+		c.TplName = "admin/basic/errormsg.html"
+		c.Data["error"] = "register user failed."
+		return
+	}
+
+	c.Redirect("admin/basic/login.html", 301)
+	// c.TplName = "admin/basic/login.html"
 }
