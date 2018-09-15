@@ -6,8 +6,8 @@ import (
 	"github.com/MDGSF/Blog/u"
 )
 
-// TUser table UserInfo
-type TUser struct {
+// User table UserInfo
+type User struct {
 	ID          uint64 `gorm:"primary_key"`
 	CreatedAt   time.Time
 	UserName    string `gorm:"type:varchar(255);unique_index"`
@@ -17,13 +17,13 @@ type TUser struct {
 	PhoneNumber string `gorm:"type:varchar(255)"`
 }
 
-// TableName TUser table name
-func (TUser) TableName() string {
+// TableName User table name
+func (User) TableName() string {
 	return "UserInfo"
 }
 
 // Create create a new user.
-func (user *TUser) Create() error {
+func (user *User) Create() error {
 	if err := gDB.Create(user).Error; err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func (user *TUser) Create() error {
 }
 
 // Query query one user info.
-func (user *TUser) Query() error {
+func (user *User) Query() error {
 	if err := gDB.Where(user).First(user).Error; err != nil {
 		return err
 	}
@@ -39,12 +39,12 @@ func (user *TUser) Query() error {
 }
 
 // Update update one user info.
-func (user *TUser) Update() {
+func (user *User) Update() {
 	gDB.Save(user)
 }
 
 // Delete delete one user.
-func (user *TUser) Delete() {
+func (user *User) Delete() {
 	gDB.Delete(user)
 }
 

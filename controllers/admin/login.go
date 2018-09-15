@@ -40,5 +40,8 @@ func (c *LoginController) Post() {
 		return
 	}
 
+	c.SetSession("loginuser", username)
+	beego.Info("current session =", c.GetSession("loginuser"), c.CruSession)
+
 	c.TplName = "admin/gentelella-1.4.0/production/index.html"
 }

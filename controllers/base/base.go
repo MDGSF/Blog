@@ -1,6 +1,9 @@
 package base
 
 import (
+	"time"
+
+	"github.com/MDGSF/Blog/modules/models"
 	"github.com/MDGSF/Blog/setting"
 	"github.com/MDGSF/Blog/u"
 	"github.com/astaxie/beego"
@@ -11,6 +14,8 @@ import (
 type Controller struct {
 	beego.Controller
 	i18n.Locale
+	User    models.User
+	IsLogin bool
 }
 
 // Prepare main controller Prepare
@@ -19,6 +24,10 @@ func (c *Controller) Prepare() {
 	if c.Ctx.Request.Form == nil {
 		c.Ctx.Request.ParseForm()
 	}
+
+	c.Data["PageStartTime"] = time.Now()
+
+	c.StartSession()
 
 	c.setLang()
 

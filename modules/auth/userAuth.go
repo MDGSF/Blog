@@ -23,7 +23,7 @@ func HashUserPassword(password string, salt string) string {
 
 // IsUserExist judge whether username exist in db.
 func IsUserExist(username string) bool {
-	user := &models.TUser{}
+	user := &models.User{}
 	user.UserName = username
 
 	if err := user.Query(); err != nil {
@@ -34,7 +34,7 @@ func IsUserExist(username string) bool {
 
 // IsEmailExist judge whether email exist in db.
 func IsEmailExist(email string) bool {
-	user := &models.TUser{}
+	user := &models.User{}
 	user.Email = email
 
 	if err := user.Query(); err != nil {
@@ -46,7 +46,7 @@ func IsEmailExist(email string) bool {
 // RegisterUser register user to db
 func RegisterUser(username, password, email string) error {
 
-	user := &models.TUser{}
+	user := &models.User{}
 
 	salt := models.GetUserSalt()
 	pwd := HashUserPassword(password, salt)

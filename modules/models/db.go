@@ -36,5 +36,5 @@ func DBStart() {
 	}
 
 	// auto generate table.
-	gDB.AutoMigrate(&TUser{})
+	gDB.AutoMigrate(&User{})
 }
