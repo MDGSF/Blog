@@ -39,13 +39,19 @@ func (user *User) Query() error {
 }
 
 // Update update one user info.
-func (user *User) Update() {
-	gDB.Save(user)
+func (user *User) Update() error {
+	if err := gDB.Save(user).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 // Delete delete one user.
-func (user *User) Delete() {
-	gDB.Delete(user)
+func (user *User) Delete() error {
+	if err := gDB.Delete(user).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 // GetUserSalt return a user salt token
