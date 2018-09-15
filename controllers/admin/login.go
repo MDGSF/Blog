@@ -15,7 +15,7 @@ type LoginController struct {
 func (c *LoginController) Get() {
 	beego.Info("LoginController get")
 
-	c.TplName = "admin/basic/login.html"
+	c.TplName = "admin/gentelella-1.4.0/production/login.html"
 }
 
 // Post controller Post
