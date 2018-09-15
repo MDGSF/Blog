@@ -33,9 +33,12 @@ func (c *LoginController) Post() {
 	}
 
 	if !auth.IsUserExist(username) {
-		beego.Error("username already exist in db.")
+		strError := "username not exist in db."
+		beego.Error(strError)
+		c.TplName = "admin/basic/errormsg.html"
+		c.Data["error"] = strError
 		return
 	}
 
-	c.TplName = "admin/basic/login.html"
+	c.TplName = "admin/gentelella-1.4.0/production/index.html"
 }
