@@ -33,6 +33,19 @@ func (c *Controller) Prepare() {
 	switch {
 	case auth.GetUserFromSession(&c.User, c.CruSession):
 		c.IsLogin = true
+	case auth.LoginUserFromRememberCookie(&c.User, c.Ctx):
+		c.IsLogin = true
+	}
+
+	if c.IsLogin {
+		c.Data["User"] = &c.User
+		c.Data["IsLogin"] = c.IsLogin
+
+		if c.User.IsForbid {
+			auth.LogoutUser(c.Ctx)
+			//c.FlashRedirect() TODO
+			return
+		}
 	}
 
 	c.setLang()

@@ -34,6 +34,8 @@ var (
 	PostAuthor         string
 	PostAbstractionLen int
 
+	LoginRememberDays int
+
 	CookieRememberName string
 	CookieUserName     string
 )
@@ -75,6 +77,8 @@ func settingGlobalVariables() {
 	PostDirectory = beego.AppConfig.Strings("PostDirectory")
 	PostAuthor = beego.AppConfig.DefaultString("PostAuthor", "author")
 	PostAbstractionLen = beego.AppConfig.DefaultInt("PostAbstractionLen", 100)
+
+	LoginRememberDays = beego.AppConfig.DefaultInt("login_remember_days", 7)
 
 	CookieRememberName = beego.AppConfig.DefaultString("cookie_remember_name", "blog_remember_name")
 	CookieUserName = beego.AppConfig.DefaultString("cookie_user_name", "blog_user_name")

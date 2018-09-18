@@ -15,6 +15,10 @@ type User struct {
 	NickName    string `gorm:"type:varchar(255)"`
 	Email       string `gorm:"type:varchar(255)"`
 	PhoneNumber string `gorm:"type:varchar(255)"`
+	IsAdmin     bool
+	IsActive    bool
+	IsForbid    bool
+	Rands       string `gorm:"type:varchar(10)"`
 }
 
 // TableName User table name
@@ -24,6 +28,7 @@ func (User) TableName() string {
 
 // Create create a new user.
 func (user *User) Create() error {
+	user.Rands = GetUserSalt()
 	if err := gDB.Create(user).Error; err != nil {
 		return err
 	}
@@ -56,5 +61,5 @@ func (user *User) Delete() error {
 
 // GetUserSalt return a user salt token
 func GetUserSalt() string {
-	return u.GetRandomString(8)
+	return u.GetRandomString(10)
 }
