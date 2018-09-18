@@ -43,5 +43,12 @@ func (c *LoginController) Post() {
 	c.SetSession("loginuser", username)
 	beego.Info("current session =", c.GetSession("loginuser"), c.CruSession)
 
-	c.TplName = "admin/gentelella-1.4.0/production/index.html"
+	// 抓包看下就知道了。
+	// 直接用 TplName，就是服务器把这个 index.html 的页面直接发送给了客户端。
+	// 但是这里用了模板，所以直接发送的话，有的东西可能就没有处理。
+	// c.TplName = "admin/gentelella-1.4.0/production/index.html"
+
+	// 用 redirect 的话，客户端会收到 302，然后用 /admin 重新向服务器发送请求。
+	// 这里会走整个完整的请求流程。
+	c.Redirect("/admin", 302)
 }
