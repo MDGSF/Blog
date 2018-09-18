@@ -1,7 +1,9 @@
 package u
 
 import (
+	"crypto/md5"
 	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"reflect"
@@ -76,4 +78,11 @@ func GetRandomString(n int) string {
 		bytes[i] = alphanum[b%byte(len(alphanum))]
 	}
 	return string(bytes)
+}
+
+// EncodeMd5 use md5 to encode str
+func EncodeMd5(str string) string {
+	m := md5.New()
+	m.Write([]byte(str))
+	return hex.EncodeToString(m.Sum(nil))
 }

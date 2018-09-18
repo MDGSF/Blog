@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/MDGSF/Blog/modules/models"
+	"github.com/astaxie/beego/session"
 	"golang.org/x/crypto/scrypt"
 )
 
@@ -56,4 +57,27 @@ func RegisterUser(username, password, email string) error {
 	user.Email = email
 	user.NickName = username
 	return user.Create()
+}
+
+// GetUserIDFromSession get user id from session
+func GetUserIDFromSession(sess session.Store) uint64 {
+	if id, ok := sess.Get("auth_user_id").(uint64); ok && id > 0 {
+		return id
+	}
+	return 0
+}
+
+// GetUserFromSession get user from session
+// @user[out]: store result in user.
+// @return true: success,  false: failed.
+func GetUserFromSession(user *models.User, sess session.Store) bool {
+	id := GetUserIDFromSession(sess)
+	if id > 0 {
+		u := &models.User{ID: id}
+		if u.Query() == nil {
+			*user = *u
+			return true
+		}
+	}
+	return false
 }

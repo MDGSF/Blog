@@ -3,6 +3,7 @@ package base
 import (
 	"time"
 
+	"github.com/MDGSF/Blog/modules/auth"
 	"github.com/MDGSF/Blog/modules/models"
 	"github.com/MDGSF/Blog/setting"
 	"github.com/MDGSF/Blog/u"
@@ -28,6 +29,11 @@ func (c *Controller) Prepare() {
 	c.Data["PageStartTime"] = time.Now()
 
 	c.StartSession()
+
+	switch {
+	case auth.GetUserFromSession(&c.User, c.CruSession):
+		c.IsLogin = true
+	}
 
 	c.setLang()
 
