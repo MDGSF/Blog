@@ -86,3 +86,7 @@ func EncodeMd5(str string) string {
 	m.Write([]byte(str))
 	return hex.EncodeToString(m.Sum(nil))
 }
+
+func IsMatchHost(uri string) bool {
+
+}

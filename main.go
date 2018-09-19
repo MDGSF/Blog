@@ -29,6 +29,8 @@ func initialize() {
 	models.LoadAllPostsDirectory()
 
 	models.DBStart()
+
+	routers.Init()
 }
 
 func initStaticDirectory() {

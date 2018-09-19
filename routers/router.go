@@ -8,15 +8,29 @@ import (
 	"github.com/astaxie/beego"
 )
 
-func init() {
+// Init init routers
+func Init() {
 
-	beego.Router("/default", &demo.MainController{})
-	beego.Router("/layui", &demo.LayuiController{})
-	beego.Router("/bootstrap", &demo.BootstrapController{})
-	beego.Router("/login", &demo.LoginController{})
-	beego.Router("/upload", &demo.UploadController{})
-	beego.Router("/marked", &demo.MarkedController{})
+	initDemo()
 
+	initFront()
+
+	initAdmin()
+}
+
+func initAdmin() {
+	beego.Router("/admin", &admin.AdminController{})
+
+	adminLogin := &admin.LoginController{}
+	beego.Router("/admin/login", adminLogin, "get:Get;post:Login")
+	beego.Router("/admin/logout", adminLogin, "get:Logout")
+
+	beego.Router("/admin/register", &admin.RegisterController{})
+	beego.Router("/admin/resetpwd", &admin.ResetPasswordController{})
+	beego.Router("/admin/forgotpwd", &admin.ForgotPasswordController{})
+}
+
+func initFront() {
 	beego.Router("/", &api.IndexController{})
 	beego.Router("/pg", &api.IndexController{})
 	beego.Router("/posts/*", &api.PostController{})
@@ -25,10 +39,13 @@ func init() {
 	beego.Router("/search", &api.SearchController{})
 	beego.Router("/about", &api.AboutController{})
 	beego.Router("/classification", &api.ClassificationController{})
+}
 
-	beego.Router("/admin", &admin.AdminController{})
-	beego.Router("/admin/login", &admin.LoginController{})
-	beego.Router("/admin/register", &admin.RegisterController{})
-	beego.Router("/admin/resetpwd", &admin.ResetPasswordController{})
-	beego.Router("/admin/forgotpwd", &admin.ForgotPasswordController{})
+func initDemo() {
+	beego.Router("/default", &demo.MainController{})
+	beego.Router("/layui", &demo.LayuiController{})
+	beego.Router("/bootstrap", &demo.BootstrapController{})
+	beego.Router("/login", &demo.LoginController{})
+	beego.Router("/upload", &demo.UploadController{})
+	beego.Router("/marked", &demo.MarkedController{})
 }

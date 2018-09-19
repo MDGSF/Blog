@@ -22,9 +22,9 @@ func (c *LoginController) Get() {
 
 }
 
-// Post controller Post
-func (c *LoginController) Post() {
-	beego.Info("LoginController post", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
+// Login controller Post
+func (c *LoginController) Login() {
+	beego.Info("LoginController Login", c.Ctx.Input.Params(), c.Ctx.Request.Form, c.Ctx.Request.PostForm)
 
 	username := c.Ctx.Request.Form.Get("name")
 	password := c.Ctx.Request.Form.Get("password")
@@ -55,4 +55,13 @@ func (c *LoginController) Post() {
 	// 用 redirect 的话，客户端会收到 302，然后用 /admin 重新向服务器发送请求。
 	// 这里会走整个完整的请求流程。
 	c.Redirect("/admin", 302)
+}
+
+// Logout implemented user logout page.
+func (c *LoginController) Logout() {
+	auth.LogoutUser(c.Ctx)
+
+	c.FlashWrite("HasLogout", "true")
+
+	c.Redirect("/admin/login", 302)
 }
