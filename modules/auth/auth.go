@@ -66,7 +66,12 @@ func RegisterUser(username, password, email string) error {
 
 // GetUserIDFromSession get user id from session
 func GetUserIDFromSession(sess session.Store) uint64 {
-	if id, ok := sess.Get("auth_user_id").(uint64); ok && id > 0 {
+	userID := sess.Get("auth_user_id")
+	if userID == nil {
+		return 0
+	}
+
+	if id, ok := userID.(uint64); ok && id > 0 {
 		return id
 	}
 	return 0
@@ -76,6 +81,10 @@ func GetUserIDFromSession(sess session.Store) uint64 {
 // @user[out]: store result in user.
 // @return true: success,  false: failed.
 func GetUserFromSession(user *models.User, sess session.Store) bool {
+	if sess == nil {
+		return false
+	}
+
 	id := GetUserIDFromSession(sess)
 	if id > 0 {
 		u := &models.User{ID: id}

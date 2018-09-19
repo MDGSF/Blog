@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/MDGSF/Blog/modules/models"
-	_ "github.com/MDGSF/Blog/routers"
+	"github.com/MDGSF/Blog/routers"
 	"github.com/MDGSF/Blog/setting"
 	"github.com/beego/i18n"
 

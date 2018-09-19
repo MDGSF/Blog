@@ -28,6 +28,7 @@ var (
 var (
 	HTTPAddr string
 	HTTPPort int
+	AppHost  string
 
 	EnableAdmin bool
 	AdminAddr   string
@@ -82,6 +83,7 @@ func settingGlobalVariables() {
 
 	HTTPAddr = beego.AppConfig.DefaultString("httpaddr", "127.0.0.1")
 	HTTPPort = beego.AppConfig.DefaultInt("httpport", 8080)
+	AppHost = beego.AppConfig.DefaultString("app_host", "127.0.0.1:8080")
 	EnableAdmin = beego.AppConfig.DefaultBool("EnableAdmin", false)
 	AdminAddr = beego.AppConfig.DefaultString("AdminAddr", "localhost")
 	AdminPort = beego.AppConfig.DefaultString("AdminPort", "8088")

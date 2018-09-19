@@ -61,7 +61,7 @@ func (c *LoginController) Login() {
 func (c *LoginController) Logout() {
 	auth.LogoutUser(c.Ctx)
 
-	c.FlashWrite("HasLogout", "true")
+	//c.FlashWrite("HasLogout", "true")
 
 	c.Redirect("/admin/login", 302)
 }

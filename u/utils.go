@@ -5,9 +5,12 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
+	"net/url"
 	"os"
 	"reflect"
 	"regexp"
+
+	"github.com/MDGSF/Blog/setting"
 )
 
 // IsValidIDCard check IDCard is valid or not.
@@ -87,6 +90,20 @@ func EncodeMd5(str string) string {
 	return hex.EncodeToString(m.Sum(nil))
 }
 
+// IsMatchHost check the uri
 func IsMatchHost(uri string) bool {
+	if len(uri) == 0 {
+		return false
+	}
 
+	u, err := url.ParseRequestURI(uri)
+	if err != nil {
+		return false
+	}
+
+	if u.Host != setting.AppHost {
+		return false
+	}
+
+	return true
 }
