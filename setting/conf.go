@@ -9,19 +9,9 @@ import (
 )
 
 var (
-	AppName  string
-	HTTPPort string
-	RunMode  string
+	AppName string
 
-	EnableAdmin bool
-	AdminAddr   string
-	AdminPort   string
-
-	DBHost     string
-	DBPort     string
-	DBUser     string
-	DBPassWord string
-	DBName     string
+	RunMode string
 
 	AppVersion        string
 	AppAuthor         string
@@ -33,9 +23,27 @@ var (
 	PostDirectory      []string
 	PostAuthor         string
 	PostAbstractionLen int
+)
 
-	LoginRememberDays int
+var (
+	HTTPAddr string
+	HTTPPort int
 
+	EnableAdmin bool
+	AdminAddr   string
+	AdminPort   string
+)
+
+var (
+	DBHost     string
+	DBPort     string
+	DBUser     string
+	DBPassWord string
+	DBName     string
+)
+
+var (
+	LoginRememberDays  int
 	CookieRememberName string
 	CookieUserName     string
 )
@@ -53,19 +61,13 @@ func LoadConfig() {
 }
 
 func settingGlobalVariables() {
+
+	// you can use this to load many config file, app1.conf, app2.conf, app3.conf ...
+	// beego.LoadAppConfig("ini", "conf/app.conf")
+
+	// read app.conf
 	AppName = beego.AppConfig.DefaultString("appname", "blog")
-	HTTPPort = beego.AppConfig.DefaultString("httpport", "8080")
 	RunMode = beego.AppConfig.DefaultString("runmode", "dev")
-
-	EnableAdmin = beego.AppConfig.DefaultBool("EnableAdmin", false)
-	AdminAddr = beego.AppConfig.DefaultString("AdminAddr", "localhost")
-	AdminPort = beego.AppConfig.DefaultString("AdminPort", "8088")
-
-	DBHost = beego.AppConfig.DefaultString("DBHost", "localhost")
-	DBPort = beego.AppConfig.DefaultString("DBPort", "3306")
-	DBUser = beego.AppConfig.DefaultString("DBUser", "root")
-	DBPassWord = beego.AppConfig.DefaultString("DBPassWord", "123456")
-	DBName = beego.AppConfig.DefaultString("DBName", "db_name")
 
 	AppVersion = beego.AppConfig.DefaultString("AppVersion", "1.0.0.1")
 	AppAuthor = beego.AppConfig.DefaultString("AppAuthor", "author")
@@ -78,26 +80,56 @@ func settingGlobalVariables() {
 	PostAuthor = beego.AppConfig.DefaultString("PostAuthor", "author")
 	PostAbstractionLen = beego.AppConfig.DefaultInt("PostAbstractionLen", 100)
 
-	LoginRememberDays = beego.AppConfig.DefaultInt("login_remember_days", 7)
+	HTTPAddr = beego.AppConfig.DefaultString("httpaddr", "127.0.0.1")
+	HTTPPort = beego.AppConfig.DefaultInt("httpport", 8080)
+	EnableAdmin = beego.AppConfig.DefaultBool("EnableAdmin", false)
+	AdminAddr = beego.AppConfig.DefaultString("AdminAddr", "localhost")
+	AdminPort = beego.AppConfig.DefaultString("AdminPort", "8088")
 
+	DBHost = beego.AppConfig.DefaultString("orm::DBHost", "localhost")
+	DBPort = beego.AppConfig.DefaultString("orm::DBPort", "3306")
+	DBUser = beego.AppConfig.DefaultString("orm::DBUser", "root")
+	DBPassWord = beego.AppConfig.DefaultString("orm::DBPassWord", "123456")
+	DBName = beego.AppConfig.DefaultString("orm::DBName", "db_name")
+
+	LoginRememberDays = beego.AppConfig.DefaultInt("login_remember_days", 7)
 	CookieRememberName = beego.AppConfig.DefaultString("cookie_remember_name", "blog_remember_name")
 	CookieUserName = beego.AppConfig.DefaultString("cookie_user_name", "blog_user_name")
 
-	beego.Info("AppName =", AppName)
-	beego.Info("HTTPPort =", HTTPPort)
-	beego.Info("RunMode =", RunMode)
+	// set to beego setting
+	beego.BConfig.Listen.HTTPAddr = HTTPAddr
+	beego.BConfig.Listen.HTTPPort = HTTPPort
 
-	beego.Info("EnableAdmin =", EnableAdmin)
-	beego.Info("AdminAddr =", AdminAddr)
-	beego.Info("AdminPort =", AdminPort)
+	// print all settings
+	beego.Info("AppName =", AppName)
+	beego.Info("RunMode =", RunMode)
 
 	beego.Info("AppVersion =", AppVersion)
 	beego.Info("AppAuthor =", AppAuthor)
 	beego.Info("AppAuthorEmail =", AppAuthorEmail)
+	beego.Info("AppAuthorGitHub =", AppAuthorGitHub)
+	beego.Info("AppAuthorTwitter =", AppAuthorTwitter)
+	beego.Info("AppAuthorFacebook =", AppAuthorFacebook)
 
 	beego.Info("PostDirectory =", PostDirectory)
 	beego.Info("PostAuthor =", PostAuthor)
 	beego.Info("PostAbstractionLen =", PostAbstractionLen)
+
+	beego.Info("HTTPAddr =", HTTPAddr)
+	beego.Info("HTTPPort =", HTTPPort)
+	beego.Info("EnableAdmin =", EnableAdmin)
+	beego.Info("AdminAddr =", AdminAddr)
+	beego.Info("AdminPort =", AdminPort)
+
+	beego.Info("DBHost =", DBHost)
+	beego.Info("DBPort =", DBPort)
+	beego.Info("DBUser =", DBUser)
+	beego.Info("DBPassWord =", DBPassWord)
+	beego.Info("DBName =", DBName)
+
+	beego.Info("LoginRememberDays =", LoginRememberDays)
+	beego.Info("CookieRememberName =", CookieRememberName)
+	beego.Info("CookieUserName =", CookieUserName)
 }
 
 func settingLocales() {

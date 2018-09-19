@@ -4,6 +4,8 @@ https://github.com/astaxie/beego
 
 https://github.com/astaxie/build-web-application-with-golang
 
+https://beego.me/docs/mvc/controller/config.md  (参数配置)
+
 https://github.com/beego/wetalk
 
 https://www.layui.com/doc/

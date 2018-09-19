@@ -15,7 +15,11 @@ type LoginController struct {
 func (c *LoginController) Get() {
 	beego.Info("LoginController get")
 
+	c.Data["IsLoginPage"] = true
 	c.TplName = "admin/gentelella-1.4.0/production/login.html"
+
+	//loginRedirect := strings.TrimSpace(c.GetString("to"))
+
 }
 
 // Post controller Post
