@@ -6,50 +6,52 @@
 
 {{define "body"}}
 <div class="container">
-    <div class="row">
+	<div class="row">
 
-        <ul id="classificationTab" class="nav nav-tabs">
-            <li class="active">
-                <a href="#classificationCategory" data-toggle="tab">
-                    {{i18n .Lang "classification.tr_category"}}
-                </a>
-            </li>
-            <li>
-                <a href="#classificationYearMonth" data-toggle="tab">
-                    {{i18n .Lang "classification.tr_yearmonth"}}
-                </a>
-            </li>
-        </ul>
+		<div>
+			<a href="/classification?categorytype=postcategory" type="button" 
+			class="btn {{if .IsPostCategory}}btn-info{{else}}btn-default{{end}}">
+				{{i18n .Lang "classification.tr_category"}}
+			</a>
 
-        <div id="classificationTabContent" class="tab-content">
-            <div class="tab-pane fade in active" id="classificationCategory">
-                {{range $categoryname, $postarr := .classificationCategory}}
-                <h4>{{$categoryname}}</h4>
-                <ul>
-                    {{range $postIndex, $post := $postarr}}
-                    <li>
-                        {{$post.YearMonth}}
-                        <a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
-                    </li>
-                    {{end}}
-                </ul>
-                {{end}}
-            </div>
-            <div class="tab-pane fade in active" id="classificationYearMonth">
-                {{range $categoryname, $postarr := .classificationYearMonth}}
-                <h4>{{$categoryname}}</h4>
-                <ul>
-                    {{range $postIndex, $post := $postarr}}
-                    <li>
-                        {{$post.YearMonth}}
-                        <a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
-                    </li>
-                    {{end}}
-                </ul>
-                {{end}}
-            </div>
-        </div>
+			<a href="/classification?categorytype=monthcategory" type="button" 
+			class="btn {{if .IsMonthCategory}}btn-info{{else}}btn-default{{end}}">
+				{{i18n .Lang "classification.tr_yearmonth"}}
+			</a>
+		</div>
 
-    </div>
+		{{if .IsPostCategory}}
+		<div>
+			{{range $categoryname, $postarr := .classificationCategory}}
+			<h4>{{$categoryname}}</h4>
+			<ul>
+				{{range $postIndex, $post := $postarr}}
+				<li>
+					{{$post.YearMonth}}
+					<a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
+				</li>
+				{{end}}
+			</ul>
+			{{end}}
+		</div>
+		{{end}}
+
+		{{if .IsMonthCategory}}
+		<div>
+			{{range $categoryname, $postarr := .classificationYearMonth}}
+			<h4>{{$categoryname}}</h4>
+			<ul>
+				{{range $postIndex, $post := $postarr}}
+				<li>
+					{{$post.YearMonth}}
+					<a href="{{ $post.ReqURL }}">{{ $post.Title }}</a>
+				</li>
+				{{end}}
+			</ul>
+			{{end}}
+		</div>
+		{{end}}
+
+	</div>
 </div>
 {{end}}
