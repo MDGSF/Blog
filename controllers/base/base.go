@@ -1,6 +1,7 @@
 package base
 
 import (
+	"strings"
 	"time"
 
 	"github.com/MDGSF/Blog/modules/auth"
@@ -22,6 +23,8 @@ type Controller struct {
 // Prepare main controller Prepare
 func (c *Controller) Prepare() {
 
+	beego.Info("enter prepare")
+
 	if c.Ctx.Request.Form == nil {
 		c.Ctx.Request.ParseForm()
 	}
@@ -32,10 +35,14 @@ func (c *Controller) Prepare() {
 
 	switch {
 	case auth.GetUserFromSession(&c.User, c.CruSession):
+		beego.Info("user in session =", c.User)
 		c.IsLogin = true
 	case auth.LoginUserFromRememberCookie(&c.User, c.Ctx):
+		beego.Info("user in cookie =", c.User)
 		c.IsLogin = true
 	}
+
+	beego.Info("prepare c.IsLogin =", c.IsLogin)
 
 	if c.IsLogin {
 		c.Data["User"] = &c.User
@@ -134,4 +141,21 @@ func (c *Controller) SetPaginator(per int, nums int64) *u.Paginator {
 	p := u.NewPaginator(c.Ctx.Request, per, nums)
 	c.Data["paginator"] = p
 	return p
+}
+
+// LoginUser ...
+func (c *Controller) LoginUser(user *models.User, remember bool) string {
+	loginRedirect := strings.TrimSpace(c.Ctx.GetCookie("login_to"))
+	if u.IsMatchHost(loginRedirect) == false {
+		loginRedirect = "/admin"
+	} else {
+		c.Ctx.SetCookie("login_to", "", -1, "/")
+	}
+
+	// login user
+	auth.LoginUser(user, c.Ctx, remember)
+
+	c.setLangCookie(i18n.GetLangByIndex(user.Lang))
+
+	return loginRedirect
 }

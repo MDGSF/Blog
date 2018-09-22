@@ -11,7 +11,7 @@ import (
 
 func main() {
 	beego.SetLogFuncCall(true)
-	beego.SetLevel(beego.LevelDebug)
+	beego.SetLevel(beego.LevelInformational)
 	beego.Debug("main start")
 
 	initialize()

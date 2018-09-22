@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
@@ -28,8 +29,7 @@ func HashUserPassword(password string, salt string) string {
 }
 
 // IsUserExist judge whether username exist in db.
-func IsUserExist(username string) bool {
-	user := &models.User{}
+func IsUserExist(user *models.User, username string) bool {
 	user.UserName = username
 
 	if err := user.Query(); err != nil {
@@ -47,6 +47,32 @@ func IsEmailExist(email string) bool {
 		return false
 	}
 	return true
+}
+
+// VerifyUser 验证用户
+func VerifyUser(user *models.User, username, password string) (success bool) {
+	if !IsUserExist(user, username) {
+		return
+	}
+
+	if !VerifyPassword(password, user.PassWord) {
+		return
+	}
+
+	success = true
+	return
+}
+
+// VerifyPassword 验证密码
+func VerifyPassword(rawPwd, encodedPwd string) bool {
+	arr := strings.Split(encodedPwd, "$")
+	if len(arr) != 2 {
+		return false
+	}
+
+	salt := arr[0]
+	pwd := HashUserPassword(rawPwd, salt)
+	return pwd == arr[1]
 }
 
 // RegisterUser register user to db

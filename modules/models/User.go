@@ -19,6 +19,7 @@ type User struct {
 	IsActive    bool
 	IsForbid    bool
 	Rands       string `gorm:"type:varchar(10)"`
+	Lang        int
 }
 
 // TableName User table name

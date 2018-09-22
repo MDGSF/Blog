@@ -5,6 +5,7 @@ import (
 
 	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/modules/auth"
+	"github.com/MDGSF/Blog/modules/models"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
 )
@@ -42,7 +43,8 @@ func (c *RegisterController) Post() {
 		return
 	}
 
-	if auth.IsUserExist(username) {
+	var user models.User
+	if auth.IsUserExist(&user, username) {
 		strError := "username already exist in db."
 		beego.Error(strError)
 		c.TplName = "admin/basic/errormsg.html"

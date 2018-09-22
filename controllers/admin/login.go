@@ -3,6 +3,7 @@ package admin
 import (
 	"github.com/MDGSF/Blog/controllers/base"
 	"github.com/MDGSF/Blog/modules/auth"
+	"github.com/MDGSF/Blog/modules/models"
 	"github.com/astaxie/beego"
 )
 
@@ -29,6 +30,12 @@ func (c *LoginController) Login() {
 	username := c.Ctx.Request.Form.Get("name")
 	password := c.Ctx.Request.Form.Get("password")
 
+	var remember bool
+	fremember := c.Ctx.Request.Form.Get("remember")
+	if len(fremember) > 0 {
+		remember = true
+	}
+
 	beego.Info("username, password =", username, password)
 
 	if len(username) == 0 || len(password) == 0 {
@@ -36,9 +43,11 @@ func (c *LoginController) Login() {
 		return
 	}
 
-	if !auth.IsUserExist(username) {
+	var user models.User
+
+	if !auth.VerifyUser(&user, username, password) {
 		strError := "username not exist in db."
-		beego.Error(strError)
+		beego.Error(strError, user)
 		c.TplName = "admin/basic/errormsg.html"
 		c.Data["error"] = strError
 		return
@@ -47,6 +56,21 @@ func (c *LoginController) Login() {
 	c.SetSession("loginuser", username)
 	beego.Info("current session =", c.GetSession("loginuser"), c.CruSession)
 
+	loginRedirect := c.LoginUser(&user, remember)
+
+	if c.IsAjax() {
+		c.Data["json"] = map[string]interface{}{
+			"success":  true,
+			"message":  c.Tr("auth.login_success_ajax"),
+			"redirect": loginRedirect,
+		}
+		c.ServeJSON()
+		return
+	}
+
+	c.Redirect(loginRedirect, 302)
+	return
+
 	// 抓包看下就知道了。
 	// 直接用 TplName，就是服务器把这个 index.html 的页面直接发送给了客户端。
 	// 但是这里用了模板，所以直接发送的话，有的东西可能就没有处理。
@@ -54,7 +78,7 @@ func (c *LoginController) Login() {
 
 	// 用 redirect 的话，客户端会收到 302，然后用 /admin 重新向服务器发送请求。
 	// 这里会走整个完整的请求流程。
-	c.Redirect("/admin", 302)
+	//c.Redirect("/admin", 302)
 }
 
 // Logout implemented user logout page.
