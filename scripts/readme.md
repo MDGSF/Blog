@@ -22,6 +22,8 @@ minute hour day month week command
 * * */1 * * /usr/local/gopath/src/github.com/MDGSF/Blog/scripts/syncPostFromGithub.sh > /dev/null 2>&1 &
 每天执行一次
 
+00 00 * * * command
+每天00:00执行一次
 
 * * * * * command
 每分钟执行一次
